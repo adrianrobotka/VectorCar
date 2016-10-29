@@ -1,0 +1,3 @@
+[submodule "brick"]
+	path = brick
+	url = git@github.com:adrianrobotka/brick.git
