@@ -16,25 +16,31 @@ import hu.pendroid.dnga.vectorcar.Config;
  * Draw game
  */
 public final class GameDrawer extends MainDrawer {
-    private static final int BORDER_WIDTH = 2, INNER_PADDING = 2;
+    private static final int BORDER_WIDTH = 0;
+    private static final int INNER_PADDING = 1;
     private Paint borderPaint;
 
+    /**
+     * Creates GameDrawer
+     *
+     * @param context Context of the activity (to get resources)
+     */
     public GameDrawer(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public GameDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public GameDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
-    private void init() {
+    private void init(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -42,6 +48,10 @@ public final class GameDrawer extends MainDrawer {
         borderPaint.setColor(Color.WHITE);
         borderPaint.setStrokeWidth(BORDER_WIDTH);
         borderPaint.setStyle(Paint.Style.STROKE);
+
+        for (Drawer drawer : getDrawers()) {
+            drawer.setContext(context);
+        }
     }
 
     @Override
@@ -68,8 +78,7 @@ public final class GameDrawer extends MainDrawer {
         if (r1 < r2) {
             canvas.translate(0, (getHeight() - r1 * (Config.HEIGHT + BORDER_WIDTH + INNER_PADDING * 2)) / 2);
             canvas.scale(r1, r1);
-        }
-        else {
+        } else {
             canvas.translate((getWidth() - r2 * (Config.WIDTH + BORDER_WIDTH + INNER_PADDING * 2)) / 2, 0);
             canvas.scale(r2, r2);
         }

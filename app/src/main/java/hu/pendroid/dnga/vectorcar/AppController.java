@@ -5,14 +5,21 @@ import android.util.Log;
 import com.adrianrobotka.brick.Controller;
 import com.adrianrobotka.brick.util.ProcessIndicator;
 
-public class AppController extends Controller {
+import hu.pendroid.dnga.vectorcar.model.Car;
+import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.view.GroundDrawer;
+
+final class AppController extends Controller {
     private static final String LOGTAG = AppController.class.getSimpleName();
     private static AppController instance = null;
+
+    private Ground ground;
+    private Car car;
 
     private AppController() {
     }
 
-    public static AppController getInstance() {
+    static AppController getInstance() {
         if (instance != null)
             return instance;
         else
@@ -26,10 +33,11 @@ public class AppController extends Controller {
     }
 
     protected void createModels() {
-
+        ground = new Ground();
     }
 
     protected void createDrawers() {
+        GroundDrawer groundDrawer = new GroundDrawer(ground);
 
     }
 

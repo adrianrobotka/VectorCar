@@ -5,4 +5,4 @@ Simple car game for android
 - Adrián Robotka
 - László Radnai
 - Marcell Bidlek
-- Márton Gyulai
+- Marcell Gyulai

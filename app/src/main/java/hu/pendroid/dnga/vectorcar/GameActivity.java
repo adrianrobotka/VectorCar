@@ -18,7 +18,6 @@ public final class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
         controller.setDrawerCallback(new Runnable() {
             @Override
