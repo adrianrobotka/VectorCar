@@ -15,7 +15,7 @@ public final class Car extends LaneBasedModel {
     public Car(int lane) {
         super(lane);
         metrics = new Vector(206, 427);
-        motion = new Vector(0, -0.5f);
+        motion = new Vector(0, -1f);
         setPositionByLane(lane);
     }
 

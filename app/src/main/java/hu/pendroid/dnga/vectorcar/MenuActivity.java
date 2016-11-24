@@ -21,10 +21,10 @@ public final class MenuActivity extends Activity {
 
         setCallbacks();
 
-        if (!loaded) {
+        /*if (!loaded) {
             controller.init();
             loaded = true;
-        }
+        }*/
     }
 
     private void setCallbacks() {
@@ -44,6 +44,9 @@ public final class MenuActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        //TODO remove after test
+        controller.init();
+        loaded = true;
     }
 
     private void hideNavigationBar() {

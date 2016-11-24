@@ -47,5 +47,6 @@ final class AppController extends Controller {
 
     protected void createModifiers() {
         MotionModifier motionModifier = new MotionModifier();
+        motionModifier.addModel(ground);
     }
 }

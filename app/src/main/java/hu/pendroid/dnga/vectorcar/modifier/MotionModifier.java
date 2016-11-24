@@ -22,14 +22,7 @@ public final class MotionModifier extends Modifier {
     @Override
     public void doRound() {
         for (Model model : models) {
-            /*
-             * Vector position = getPosition(model);
-             * Vector motion = getMotion(model);
-             * position.add(motion);
-             *
-             * in one line:
-            */
-            getPosition(model).add(getMotion(model));
+            model.position = model.position.add(model.motion);
         }
     }
 }

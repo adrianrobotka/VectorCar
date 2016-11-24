@@ -64,6 +64,7 @@ public final class GameActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // Do nothing on back button pressing
+            controller.stop();
             return super.onKeyDown(keyCode, event);
         }
 

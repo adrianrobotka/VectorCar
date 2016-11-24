@@ -31,21 +31,21 @@ public class GroundDrawer extends Drawer {
 
     @Override
     public void draw(Canvas canvas) {
-        drawLaneLevel(20, canvas);
+        drawLaneLevel(ground.position.getY(), canvas);
     }
 
-    private void drawLaneLevel(int y, Canvas canvas) {
-        float zoneWidth = Config.WIDTH / Config.LANES;
-        zoneWidth -= Config.LANES * ground.metrics.getY();
+    private void drawLaneLevel(float y1, Canvas canvas) {
+        float zoneWidth = Config.WIDTH - ((Config.LANES - 1) * ground.metrics.getX());
+        zoneWidth /= Config.LANES;
 
-        for (int i = 0; i < Config.LANES; i++) {
-            int x1 = (int) (zoneWidth * (i + 1) + ground.metrics.getY() * i);
-            int y1 = y;
+        for (int i = 1; i < Config.LANES; i++) {
+            float x1 = zoneWidth * i;
+            x1 += ground.metrics.getX() * (i - 1);
 
-            int x2 = (int) (x1 + ground.metrics.getX());
-            int y2 = (int) (y1 + ground.metrics.getY());
+            float x2 = x1 + ground.metrics.getX();
+            float y2 = y1 + ground.metrics.getY();
 
-            canvas.drawRect(x1, y1, x2, y2, groundPaint);
+            canvas.drawRect((int) x1, (int) y1, (int) x2, (int) y2, groundPaint);
         }
     }
 }
