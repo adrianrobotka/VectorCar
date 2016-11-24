@@ -37,7 +37,7 @@ final class AppController extends Controller {
     }
 
     protected void createDrawers() {
-        GroundDrawer groundDrawer = new GroundDrawer(ground);
+        GroundDrawer groundDrawer = new GroundDrawer(car);
 
     }
 

@@ -10,6 +10,7 @@ import com.adrianrobotka.brick.Vector;
 public final class Ground extends Model {
 
     public Ground() {
+        // Nothing to do here
         position = new Vector();
         metrics = new Vector();
         motion = new Vector();
