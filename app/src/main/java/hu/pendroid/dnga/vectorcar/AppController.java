@@ -1,7 +1,5 @@
 package hu.pendroid.dnga.vectorcar;
 
-import android.util.Log;
-
 import com.adrianrobotka.brick.Controller;
 import com.adrianrobotka.brick.util.ProcessIndicator;
 
@@ -30,7 +28,6 @@ final class AppController extends Controller {
     @Override
     public void init(ProcessIndicator indicator) throws IllegalStateException {
         super.init(indicator);
-        Log.d(LOGTAG, "AppController.init()");
     }
 
     protected void createModels() {

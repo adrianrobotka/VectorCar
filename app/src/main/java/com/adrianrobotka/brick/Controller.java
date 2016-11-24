@@ -1,5 +1,7 @@
 package com.adrianrobotka.brick;
 
+import android.util.Log;
+
 import com.adrianrobotka.brick.util.GameException;
 import com.adrianrobotka.brick.util.ProcessIndicator;
 
@@ -7,6 +9,8 @@ import com.adrianrobotka.brick.util.ProcessIndicator;
  * Initialize storage and create model logic
  */
 public abstract class Controller {
+    private static final String LOGTAG = Controller.class.getSimpleName();
+
     protected Runnable drawerCallback = null;
     protected Runnable gameOverCallback = null;
     protected ProcessIndicator indicator = null;
@@ -45,6 +49,8 @@ public abstract class Controller {
      * @param indicator Callback to update process status
      */
     public void init(ProcessIndicator indicator) throws IllegalStateException {
+        Log.d(LOGTAG, Controller.class.getSimpleName() + ".init()");
+
         run = false;
 
         if (indicator != null)
@@ -93,6 +99,8 @@ public abstract class Controller {
     }
 
     public void start() {
+        Log.d(LOGTAG, Controller.class.getSimpleName() + ".start()");
+
         // Create a worker thread for the model calculations
         new Thread(new Runnable() {
             @Override
@@ -133,6 +141,8 @@ public abstract class Controller {
     }
 
     public void stop() {
+        Log.d(LOGTAG, Controller.class.getSimpleName() + ".stop()");
+
         run = false;
     }
 

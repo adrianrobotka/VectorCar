@@ -26,6 +26,10 @@ public final class GameActivity extends Activity {
 
         setContentView(R.layout.activity_game);
 
+        setCallbacks();
+    }
+
+    private void setCallbacks() {
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
         controller.setDrawerCallback(new Runnable() {
             @Override
@@ -59,7 +63,7 @@ public final class GameActivity extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // Do nothing on back button pressing
-            return false;
+            return super.onKeyDown(keyCode, event);
         }
 
         return super.onKeyDown(keyCode, event);
@@ -69,14 +73,12 @@ public final class GameActivity extends Activity {
     protected void onResume() {
         super.onResume();
         controller.start();
-        Log.i(LOGTAG, "AppController.start()");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         controller.stop();
-        Log.i(LOGTAG, "AppController.stop()");
     }
 
     public void refresh() {

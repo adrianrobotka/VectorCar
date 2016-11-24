@@ -12,7 +12,7 @@ import com.adrianrobotka.brick.util.ProcessIndicator;
 
 public final class MenuActivity extends Activity {
     private AppController controller = AppController.getInstance();
-    private boolean loaded = false;
+    private boolean loaded;
     private int currentApiVersion;
 
     @Override
@@ -33,6 +33,14 @@ public final class MenuActivity extends Activity {
         controller.setFps(Config.FPS);
         controller.setIndicator(indicator);
 
+        setCallbacks();
+
+        if (!loaded) {
+            controller.init();
+        }
+    }
+
+    private void setCallbacks() {
         Button newGameButton = (Button) findViewById(R.id.newGameButton);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +57,6 @@ public final class MenuActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        controller.init();
     }
 
     private void hideNavigationBar() {

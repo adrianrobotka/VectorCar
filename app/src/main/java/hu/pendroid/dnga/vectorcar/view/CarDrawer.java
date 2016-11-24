@@ -28,8 +28,7 @@ public class CarDrawer extends Drawer {
     public void draw(Canvas canvas) {
         Resources res = context.getResources();
         Bitmap groundBitmap = BitmapFactory.decodeResource(res, R.drawable.car);
-        //groundBitmap = Bitmap.createScaledBitmap(groundBitmap, 5, 5, false);
-
-        canvas.drawBitmap(groundBitmap, 0, 0, null);
+        groundBitmap = Bitmap.createScaledBitmap(groundBitmap, (int) car.metrics.getX(), (int) car.metrics.getY(), false);
+        canvas.drawBitmap(groundBitmap, car.position.getX(), car.position.getY(), null);
     }
 }

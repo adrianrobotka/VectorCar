@@ -11,7 +11,7 @@ import hu.pendroid.dnga.vectorcar.Config;
 public final class Car extends Model {
 
     public Car() {
-        metrics = new Vector(1, 1);
+        metrics = new Vector(206, 427);
         motion = new Vector(Config.INITIAL_CAR_SPEED, 0);
 
         setCenterPosition();
@@ -19,11 +19,11 @@ public final class Car extends Model {
 
     public Car(Vector position) {
         this.position = position;
-        metrics = new Vector(1, 1);
+        metrics = new Vector(206, 427);
         motion = new Vector(Config.INITIAL_CAR_SPEED, 0);
     }
 
     private void setCenterPosition() {
-        position = new Vector(Config.WIDTH / 2, Config.HEIGHT / 2);
+        position = new Vector(Config.WIDTH / 2 - metrics.getX() / 2, Config.HEIGHT - metrics.getY() - 50);
     }
 }

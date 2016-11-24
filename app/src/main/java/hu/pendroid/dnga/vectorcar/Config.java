@@ -8,7 +8,7 @@ public final class Config {
     /**
      * the full abstract width of the screen
      */
-    public static final float WIDTH = 1920;
+    public static final float WIDTH = 1080;
     /**
      * Frames per seconds
      */
