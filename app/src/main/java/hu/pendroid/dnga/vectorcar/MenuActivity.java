@@ -6,13 +6,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
-
-import com.adrianrobotka.brick.util.ProcessIndicator;
 
 public final class MenuActivity extends Activity {
     private AppController controller = AppController.getInstance();
-    private boolean loaded;
+    private boolean loaded = false;
     private int currentApiVersion;
 
     @Override
@@ -20,23 +17,13 @@ public final class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        final ProgressBar progress = (ProgressBar) findViewById(R.id.initProgressBar);
-        ProcessIndicator indicator = new ProcessIndicator() {
-            @Override
-            public void setProcessPercentage(final int percentage) {
-                progress.setProgress(percentage);
-                if (percentage == 100)
-                    loaded = true;
-            }
-        };
-
         controller.setFps(Config.FPS);
-        controller.setIndicator(indicator);
 
         setCallbacks();
 
         if (!loaded) {
             controller.init();
+            loaded = true;
         }
     }
 

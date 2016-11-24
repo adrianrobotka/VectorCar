@@ -32,7 +32,7 @@ final class AppController extends Controller {
 
     protected void createModels() {
         ground = new Ground();
-        car = new Car();
+        car = new Car(Config.LANES / 2);
     }
 
     protected void createDrawers() {

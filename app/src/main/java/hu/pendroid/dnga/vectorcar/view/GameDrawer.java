@@ -8,8 +8,6 @@ import android.view.View;
 import com.adrianrobotka.brick.Drawer;
 import com.adrianrobotka.brick.MainDrawer;
 
-import hu.pendroid.dnga.vectorcar.Config;
-
 /**
  * Draw game
  */
@@ -61,13 +59,7 @@ public final class GameDrawer extends MainDrawer {
      * @param canvas to draw on
      */
     private void preDrawers(Canvas canvas) {
-        int screenWidth = getWidth();
-        float gameWidth = Config.WIDTH;
-        float scale = screenWidth / gameWidth;
-        canvas.scale(scale, scale);
 
-        // Set full abstract height of the screen (calculated from the width)
-        Config.HEIGHT = Config.WIDTH * getHeight() / getWidth();
     }
 
     /**

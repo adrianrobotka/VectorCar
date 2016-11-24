@@ -5,6 +5,34 @@
     android:background="@color/colorGameBackground"
     tools:context=".GameActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60px"
+        android:background="@color/colorInfoPanelBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="10px">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="V = "
+            android:textColor="@color/colorInfoText" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/colorInfoText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" km/h"
+            android:textColor="@color/colorInfoText" />
+
+    </LinearLayout>
+
     <hu.pendroid.dnga.vectorcar.view.GameDrawer
         android:id="@+id/gameDrawer"
         android:layout_width="match_parent"
