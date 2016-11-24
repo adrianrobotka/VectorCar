@@ -7,6 +7,7 @@ import com.adrianrobotka.brick.util.ProcessIndicator;
 
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.view.CarDrawer;
 import hu.pendroid.dnga.vectorcar.view.GroundDrawer;
 
 final class AppController extends Controller {
@@ -34,11 +35,12 @@ final class AppController extends Controller {
 
     protected void createModels() {
         ground = new Ground();
+        car = new Car();
     }
 
     protected void createDrawers() {
-        GroundDrawer groundDrawer = new GroundDrawer(car);
-
+        new GroundDrawer(car);
+        new CarDrawer(car);
     }
 
     protected void createModifiers() {

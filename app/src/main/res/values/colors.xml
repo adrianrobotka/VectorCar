@@ -3,7 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorGameBackground">#5365c9</color>
+    <color name="colorGameBackground">#838383</color>
     <color name="colorMenuBackground">#5e77ff</color>
-    <color name="white">#ffffff</color>
+    <color name="colorGameSeparatingLane">#ffffff</color>
+    <color name="colorGameSolidLane">#ff5e63</color>
+    <color name="colorGameOverText">#ffffff</color>
 </resources>

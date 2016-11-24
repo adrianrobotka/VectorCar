@@ -1,9 +1,5 @@
 package hu.pendroid.dnga.vectorcar.model;
 
-/**
- * Created by robotka1055 on 2016. 11. 24..
- */
-
 import com.adrianrobotka.brick.Model;
 import com.adrianrobotka.brick.Vector;
 
