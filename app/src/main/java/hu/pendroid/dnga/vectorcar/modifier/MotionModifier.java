@@ -1,4 +1,7 @@
-package com.adrianrobotka.brick;
+package hu.pendroid.dnga.vectorcar.modifier;
+
+import com.adrianrobotka.brick.Model;
+import com.adrianrobotka.brick.Modifier;
 
 import java.util.ArrayList;
 
@@ -10,7 +13,11 @@ public final class MotionModifier extends Modifier {
     /**
      * Get all models
      */
-    private static final ArrayList<Model> models = Storage.getModels();
+    private ArrayList<Model> models = new ArrayList<>();
+
+    public void addModel(Model model) {
+        models.add(model);
+    }
 
     @Override
     public void doRound() {

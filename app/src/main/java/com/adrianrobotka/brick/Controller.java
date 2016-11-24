@@ -68,9 +68,6 @@ public abstract class Controller {
                 createDrawers();
                 setProcessPercentage(70);
 
-                createBaseModifiers();
-                setProcessPercentage(80);
-
                 createModifiers();
                 run = true;
                 setProcessPercentage(100);
@@ -154,13 +151,6 @@ public abstract class Controller {
     protected void setProcessPercentage(final int percentage) {
         if (indicator != null)
             indicator.setProcessPercentage(percentage);
-    }
-
-    /**
-     * Create systematical modifiers
-     */
-    private void createBaseModifiers() {
-        new MotionModifier();
     }
 
     /**

@@ -6,13 +6,16 @@ import hu.pendroid.dnga.vectorcar.Config;
 
 /**
  * The car
+ * <p>
+ * Position: the position on the screen
+ * Motion: motion of the ground
  */
-public final class Car extends LaneModel {
+public final class Car extends LaneBasedModel {
 
     public Car(int lane) {
         super(lane);
         metrics = new Vector(206, 427);
-        motion = new Vector(0, 0);
+        motion = new Vector(0, -0.5f);
         setPositionByLane(lane);
     }
 

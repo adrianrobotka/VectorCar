@@ -31,6 +31,7 @@ public final class GameActivity extends Activity {
 
     private void setCallbacks() {
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
+
         controller.setDrawerCallback(new Runnable() {
             @Override
             public void run() {

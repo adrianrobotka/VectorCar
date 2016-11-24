@@ -5,10 +5,10 @@ import com.adrianrobotka.brick.Model;
 /**
  * Model based on lane
  */
-abstract class LaneModel extends Model {
+abstract class LaneBasedModel extends Model {
     protected int lane;
 
-    LaneModel(int lane) {
+    LaneBasedModel(int lane) {
         this.lane = lane;
     }
 }

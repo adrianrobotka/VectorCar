@@ -5,7 +5,7 @@ import com.adrianrobotka.brick.Vector;
 /**
  * The pothole that causes problem
  */
-public final class Pothole extends LaneModel {
+public final class Pothole extends LaneBasedModel {
     public Pothole(int lane) {
         super(lane);
         position = calculatePositionByLane(lane);

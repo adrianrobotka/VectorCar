@@ -10,9 +10,13 @@ import com.adrianrobotka.brick.Vector;
 public final class Ground extends Model {
 
     public Ground() {
-        // Nothing to do here
+        // start position of the first lanes
         position = new Vector();
-        metrics = new Vector();
-        motion = new Vector();
+
+        // metrics of a lane
+        metrics = new Vector(20, 150);
+
+        // motion of the lanes
+        motion = new Vector(0, .5f);
     }
 }

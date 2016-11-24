@@ -5,7 +5,7 @@ import com.adrianrobotka.brick.Vector;
 /**
  * The fatal pothole that causes game over
  */
-public final class FatalPothole extends LaneModel {
+public final class FatalPothole extends LaneBasedModel {
     public FatalPothole(int lane) {
         super(lane);
         position = calculatePositionByLane(lane);
