@@ -1,13 +1,9 @@
 package hu.pendroid.dnga.vectorcar.view;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.adrianrobotka.brick.Drawer;
 
-import hu.pendroid.dnga.vectorcar.R;
 import hu.pendroid.dnga.vectorcar.model.Car;
 
 public class GroundDrawer extends Drawer {
@@ -28,10 +24,6 @@ public class GroundDrawer extends Drawer {
 
     @Override
     public void draw(Canvas canvas) {
-        Resources res = context.getResources();
-        Bitmap groundBitmap = BitmapFactory.decodeResource(res, R.drawable.ground);
-        //groundBitmap = Bitmap.createScaledBitmap(groundBitmap, 5, 5, false);
-
-        canvas.drawBitmap(groundBitmap, 0, 0, null);
+        /**/
     }
 }
