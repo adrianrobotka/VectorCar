@@ -15,11 +15,11 @@ public class GroundDrawer extends Drawer {
     /**
      * Create Drawer and add itself to the Storage
      *
-     * @param carModel The car to get the ground speed
+     * @param car The car to get the ground speed
      */
-    public GroundDrawer(Car carModel) {
-        super(carModel);
-        car = carModel;
+    public GroundDrawer(Car car) {
+        super(car);
+        this.car = car;
     }
 
     @Override

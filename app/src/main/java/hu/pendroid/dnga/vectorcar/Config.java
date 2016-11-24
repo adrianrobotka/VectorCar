@@ -18,6 +18,10 @@ public final class Config {
      */
     public static final float INITIAL_CAR_SPEED = 0.1f;
     /**
+     * Number of lanes
+     */
+    public static final int LANES = 3;
+    /**
      * the full abstract height of the screen (calculated from the width)
      */
     public static float HEIGHT;
