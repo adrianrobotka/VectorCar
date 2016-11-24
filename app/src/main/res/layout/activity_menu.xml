@@ -17,14 +17,12 @@
             android:layout_height="10dp"
             android:layout_gravity="center_horizontal|top" />
 
-        <Button
-            android:id="@+id/newGameButton"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:background="@drawable/round_button"
-            android:text="@string/new_game_button"
-            android:textColor="@android:color/white" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            pa
+            android:id="@+id/listView"/>
+
 
     </FrameLayout>
 </LinearLayout>
