@@ -5,5 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorGameBackground">#5365c9</color>
     <color name="colorMenuBackground">#5e77ff</color>
-
+    <color name="white">#ffffff</color>
 </resources>
