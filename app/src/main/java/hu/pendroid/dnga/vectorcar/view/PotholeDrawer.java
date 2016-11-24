@@ -4,19 +4,21 @@ import android.graphics.Canvas;
 
 import com.adrianrobotka.brick.Drawer;
 
-import hu.pendroid.dnga.vectorcar.model.Car;
+import hu.pendroid.dnga.vectorcar.model.Pothole;
 
-public class CarDrawer extends Drawer {
-    private Car car;
+public class PotholeDrawer extends Drawer {
+    private Pothole pothole;
+
     /**
      * Create Drawer and add itself to the Storage
      *
-     * @param car The Car to draw
+     * @param pothole The pothole to draw
      */
 
-    public CarDrawer(Car car) {
-        super(car);
+    public PotholeDrawer(Pothole pothole) {
+        super(pothole);
     }
+
     @Override
     public void draw(Canvas canvas) {
 
