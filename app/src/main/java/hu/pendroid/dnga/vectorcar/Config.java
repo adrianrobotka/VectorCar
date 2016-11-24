@@ -19,7 +19,7 @@ public final class Config {
     /**
      * Frames per seconds
      */
-    public static final float FPS = 60;
+    public static final float FPS = 50;
     /**
      * Number of lanes
      */

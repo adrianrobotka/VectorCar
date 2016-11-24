@@ -31,7 +31,13 @@ public class GroundDrawer extends Drawer {
 
     @Override
     public void draw(Canvas canvas) {
-        drawLaneLevel(ground.position.getY(), canvas);
+        float laneBreak = ground.metrics.getY() * 0.8f;
+        float startPoint = ground.position.getY() % (ground.metrics.getY() + laneBreak);
+        float end = Config.HEIGHT + ground.metrics.getY();
+
+        for (float y = startPoint; y < end; y += ground.metrics.getY() + laneBreak) {
+            drawLaneLevel(y - ground.metrics.getY(), canvas);
+        }
     }
 
     private void drawLaneLevel(float y1, Canvas canvas) {
