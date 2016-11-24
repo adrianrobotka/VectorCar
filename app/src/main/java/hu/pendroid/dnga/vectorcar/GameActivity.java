@@ -4,17 +4,28 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import hu.pendroid.dnga.vectorcar.model.Car;
+import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.view.GameDrawer;
 
-public final class GameActivity extends Activity {
+import static com.adrianrobotka.brick.Storage.getModels;
+
+public final class GameActivity extends Activity implements
+        GestureDetector.OnGestureListener {
     private static final String LOGTAG = GameActivity.class.getSimpleName();
     private GameDrawer drawer;
+    private TextView velocityInfoText;
+    private TextView roadInfoText;
     private AppController controller = AppController.getInstance();
+    private GestureDetectorCompat detector;
 
     private int currentApiVersion;
 
@@ -27,10 +38,23 @@ public final class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         setCallbacks();
+
+        detector = new GestureDetectorCompat(this, this);
+    }
+
+    private void refreshInfoPanel() {
+        Car car = (Car) getModels(Car.class).get(0);
+        Ground ground = (Ground) getModels(Ground.class).get(0);
+        int road = (int) ground.position.getY() / 100;
+        int speed = (int) Math.abs(car.motion.getY());
+        roadInfoText.setText(road + "");
+        velocityInfoText.setText(speed + "");
     }
 
     private void setCallbacks() {
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
+        velocityInfoText = (TextView) findViewById(R.id.velocityInfoText);
+        roadInfoText = (TextView) findViewById(R.id.roadInfoText);
 
         controller.setDrawerCallback(new Runnable() {
             @Override
@@ -39,6 +63,7 @@ public final class GameActivity extends Activity {
                     @Override
                     public void run() {
                         drawer.invalidate();
+                        refreshInfoPanel();
                     }
                 });
             }
@@ -131,4 +156,48 @@ public final class GameActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        detector.onTouchEvent(event);
+        // Be sure to call the superclass implementation
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        //Log.d(LOGTAG, "onDown: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+        //Log.d(LOGTAG, "onShowPress() ");
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onFling(MotionEvent event1, MotionEvent event2,
+                           float velocityX, float velocityY) {
+        Log.d(LOGTAG, "xonFling: " + event1.getX() + ", " + event1.getY());
+        Log.d(LOGTAG, "-onFling: " + event2.getX() + ", " + event2.getY());
+        return true;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent event) {
+        Log.d(LOGTAG, "onLongPress: " + event.toString());
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
+                            float distanceY) {
+        //Log.d(LOGTAG, "onScroll: " + e1.toString() + e2.toString());
+        return true;
+    }
+
 }

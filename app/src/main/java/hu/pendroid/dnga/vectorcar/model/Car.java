@@ -25,7 +25,7 @@ public final class Car extends LaneBasedModel {
         zoneWidth /= Config.LANES;
 
         metrics = new Vector(zoneWidth - carPadding * 2, 0);
-        motion = new Vector(0, -1f);
+        motion = new Vector(0, 2f);
 
         setPositionByLane(lane);
     }
