@@ -24,7 +24,7 @@
             android:layout_gravity="center"
             android:background="@drawable/round_button"
             android:text="@string/new_game_button"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/colorButtonText" />
 
     </FrameLayout>
 </LinearLayout>

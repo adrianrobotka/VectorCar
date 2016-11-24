@@ -7,7 +7,7 @@
     <color name="colorMenuBackground">#5e77ff</color>
     <color name="colorGameSeparatingLane">#ffffff</color>
     <color name="colorGameSolidLane">#ff5e63</color>
-    <color name="colorGameOverText">#ffffff</color>
+    <color name="colorButtonText">#ffffff</color>
     <color name="menuColor1">#323232</color>
     <color name="menuColor2">#3b3b3b</color>
     <color name="menuColor3">#474747</color>

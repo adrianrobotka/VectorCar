@@ -3,4 +3,6 @@
     <string name="new_game_button">New game</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="game_over">GameOver</string>
+    <string name="back_button">Back</string>
+    <string name="help_text">Swipe left or right to change lanes, up to accelerate, down to break!</string>
 </resources>
