@@ -7,5 +7,5 @@
     <color name="colorMenuBackground">#5e77ff</color>
     <color name="colorGameSeparatingLane">#ffffff</color>
     <color name="colorGameSolidLane">#ff5e63</color>
-
+    <color name="colorGameOverText">#ffffff</color>
 </resources>
