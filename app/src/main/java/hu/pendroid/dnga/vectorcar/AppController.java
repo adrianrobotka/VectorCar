@@ -9,6 +9,7 @@ import java.util.List;
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.model.Pothole;
+import hu.pendroid.dnga.vectorcar.modifier.CollisionDetector;
 import hu.pendroid.dnga.vectorcar.modifier.GroundMotionModifier;
 import hu.pendroid.dnga.vectorcar.modifier.MotionModifier;
 import hu.pendroid.dnga.vectorcar.modifier.PotholeSpawner;
@@ -64,5 +65,7 @@ final class AppController extends Controller {
         new GroundMotionModifier(ground);
 
         new PotholeSpawner(potholes, ground, car);
+
+        new CollisionDetector(potholes, ground, car);
     }
 }

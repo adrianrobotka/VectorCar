@@ -31,6 +31,10 @@ public final class Pothole extends LaneBasedModel {
         return y <= Config.HEIGHT && y >= -metrics.getY();
     }
 
+    public float getPotholePadding() {
+        return potholePadding;
+    }
+
     /**
      * Randomly initialize this pothole
      */
