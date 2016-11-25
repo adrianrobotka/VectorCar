@@ -11,7 +11,6 @@ import com.adrianrobotka.brick.Vector;
 
 import java.util.List;
 
-import hu.pendroid.dnga.vectorcar.Config;
 import hu.pendroid.dnga.vectorcar.R;
 import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.model.Pothole;
@@ -56,8 +55,8 @@ public class PotholesDrawer extends Drawer {
     @Override
     public void draw(Canvas canvas) {
         for (Pothole pothole : potholes) {
-            float y = ground.position.getY() + pothole.position.getY();
-            if (y >= -pothole.metrics.getY() && y <= Config.HEIGHT) {
+            float y = ground.position.getY() - pothole.position.getY();
+            if (pothole.isOnTheRoad()) {
                 canvas.drawBitmap(potholeBitmap, pothole.position.getX(), y, null);
             }
         }

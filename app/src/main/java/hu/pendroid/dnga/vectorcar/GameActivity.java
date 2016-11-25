@@ -208,9 +208,11 @@ public final class GameActivity extends Activity implements
             } else {
                 if (dY > 0) {
                     //up
-                    if (dY > Config.HEIGHT / 4)
+                    if (dY > Config.HEIGHT / 10 * 5)
+                        car.speedUp(5);
+                    if (dY > Config.HEIGHT / 10 * 3)
                         car.speedUp(3);
-                    else if (dY > Config.HEIGHT / 6)
+                    if (dY > Config.HEIGHT / 10 * 2)
                         car.speedUp(2);
                     else
                         car.speedUp();
@@ -218,9 +220,11 @@ public final class GameActivity extends Activity implements
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> UP");
                 } else {
                     //down
-                    if (-dY > Config.HEIGHT / 4)
+                    if (-dY > Config.HEIGHT / 10 * 5)
+                        car.brake(5);
+                    if (-dY > Config.HEIGHT / 10 * 3)
                         car.brake(3);
-                    else if (-dY > Config.HEIGHT / 6)
+                    if (-dY > Config.HEIGHT / 10 * 2)
                         car.brake(2);
                     else
                         car.brake();

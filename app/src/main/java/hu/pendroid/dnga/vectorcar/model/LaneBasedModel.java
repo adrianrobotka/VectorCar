@@ -8,4 +8,7 @@ import com.adrianrobotka.brick.Model;
 abstract class LaneBasedModel extends Model {
     int lane = 0;
 
+    public int getLane() {
+        return lane;
+    }
 }

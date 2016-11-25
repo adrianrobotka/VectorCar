@@ -9,6 +9,7 @@ import java.util.List;
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.model.Pothole;
+import hu.pendroid.dnga.vectorcar.modifier.GroundMotionModifier;
 import hu.pendroid.dnga.vectorcar.modifier.MotionModifier;
 import hu.pendroid.dnga.vectorcar.modifier.PotholeSpawner;
 import hu.pendroid.dnga.vectorcar.view.CarDrawer;
@@ -40,9 +41,10 @@ final class AppController extends Controller {
 
     protected void createModels() {
         ground = new Ground();
-        potholes.add(new Pothole()); // It`s enough, I think
-        potholes.add(new Pothole());
-        potholes.add(new Pothole());
+
+        for (int i = 0; i < 5; i++)
+            potholes.add(new Pothole(ground));
+
         car = new Car(Config.LANES / 2, ground);
     }
 
@@ -55,6 +57,12 @@ final class AppController extends Controller {
     protected void createModifiers() {
         MotionModifier motionModifier = new MotionModifier();
         motionModifier.addModel(ground);
-        new PotholeSpawner(potholes);
+        for (Pothole pothole : potholes) {
+            motionModifier.addModel(pothole);
+        }
+
+        new GroundMotionModifier(ground);
+
+        new PotholeSpawner(potholes, ground, car);
     }
 }
