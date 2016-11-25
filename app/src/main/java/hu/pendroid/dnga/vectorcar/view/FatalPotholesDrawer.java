@@ -12,23 +12,23 @@ import com.adrianrobotka.brick.Vector;
 import java.util.List;
 
 import hu.pendroid.dnga.vectorcar.R;
+import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
-import hu.pendroid.dnga.vectorcar.model.Pothole;
 
-public class PotholesDrawer extends Drawer {
+public class FatalPotholesDrawer extends Drawer {
 
-    private List<Pothole> potholes;
+    private List<FatalPothole> fatalPotholes;
     private Bitmap potholeBitmap;
     private Ground ground;
 
     /**
      * Create Drawer and add itself to the Storage
      *
-     * @param potholes The potholes to draw
+     * @param fatalPotholes The fatalPotholes to draw
      */
-    public PotholesDrawer(List<Pothole> potholes, Ground ground) {
+    public FatalPotholesDrawer(List<FatalPothole> fatalPotholes, Ground ground) {
         super(null);
-        this.potholes = potholes;
+        this.fatalPotholes = fatalPotholes;
         this.ground = ground;
     }
 
@@ -37,16 +37,16 @@ public class PotholesDrawer extends Drawer {
         super.setContext(context);
 
         Resources res = context.getResources();
-        potholeBitmap = BitmapFactory.decodeResource(res, R.drawable.pothole_light);
+        potholeBitmap = BitmapFactory.decodeResource(res, R.drawable.pothole_fatal);
 
-        Pothole firstPothole = potholes.get(0);
+        FatalPothole firstFatalPothole = fatalPotholes.get(0);
 
-        float scale = firstPothole.metrics.getX() / potholeBitmap.getWidth();
+        float scale = firstFatalPothole.metrics.getX() / potholeBitmap.getWidth();
         float newWidth = (int) (potholeBitmap.getWidth() * scale);
         float newHeight = (int) (potholeBitmap.getHeight() * scale);
 
-        for (Pothole pothole : potholes) {
-            pothole.metrics = new Vector(newWidth, newHeight);
+        for (FatalPothole fatalPothole : fatalPotholes) {
+            fatalPothole.metrics = new Vector(newWidth, newHeight);
         }
 
         potholeBitmap = Bitmap.createScaledBitmap(potholeBitmap, (int) newWidth, (int) newHeight, false);
@@ -54,10 +54,10 @@ public class PotholesDrawer extends Drawer {
 
     @Override
     public void draw(Canvas canvas) {
-        for (Pothole pothole : potholes) {
-            float y = ground.position.getY() - pothole.position.getY();
-            if (pothole.isOnTheRoad()) {
-                canvas.drawBitmap(potholeBitmap, pothole.position.getX(), y, null);
+        for (FatalPothole fatalPothole : fatalPotholes) {
+            float y = ground.position.getY() - fatalPothole.position.getY();
+            if (fatalPothole.isOnTheRoad()) {
+                canvas.drawBitmap(potholeBitmap, fatalPothole.position.getX(), y, null);
             }
         }
     }

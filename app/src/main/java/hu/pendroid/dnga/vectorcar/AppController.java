@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hu.pendroid.dnga.vectorcar.model.Car;
+import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
-import hu.pendroid.dnga.vectorcar.model.Pothole;
-import hu.pendroid.dnga.vectorcar.modifier.CollisionDetector;
+import hu.pendroid.dnga.vectorcar.modifier.FatalPotHoleCollisionDetector;
+import hu.pendroid.dnga.vectorcar.modifier.FatalPotholeSpawner;
 import hu.pendroid.dnga.vectorcar.modifier.GroundMotionModifier;
 import hu.pendroid.dnga.vectorcar.modifier.MotionModifier;
-import hu.pendroid.dnga.vectorcar.modifier.PotholeSpawner;
 import hu.pendroid.dnga.vectorcar.view.CarDrawer;
+import hu.pendroid.dnga.vectorcar.view.FatalPotholesDrawer;
 import hu.pendroid.dnga.vectorcar.view.GroundDrawer;
-import hu.pendroid.dnga.vectorcar.view.PotholesDrawer;
 
 final class AppController extends Controller {
     private static final String LOGTAG = AppController.class.getSimpleName();
@@ -23,7 +23,7 @@ final class AppController extends Controller {
 
     private Ground ground;
     private Car car;
-    private List<Pothole> potholes = new ArrayList<>();
+    private List<FatalPothole> fatalPotholes = new ArrayList<>();
 
     private AppController() {
     }
@@ -44,7 +44,7 @@ final class AppController extends Controller {
         ground = new Ground();
 
         for (int i = 0; i < 7; i++)
-            potholes.add(new Pothole(ground));
+            fatalPotholes.add(new FatalPothole(ground));
 
         car = new Car(Config.LANES / 2, ground);
     }
@@ -52,20 +52,20 @@ final class AppController extends Controller {
     protected void createDrawers() {
         new GroundDrawer(ground);
         new CarDrawer(car);
-        new PotholesDrawer(potholes, ground);
+        new FatalPotholesDrawer(fatalPotholes, ground);
     }
 
     protected void createModifiers() {
         MotionModifier motionModifier = new MotionModifier();
         motionModifier.addModel(ground);
-        for (Pothole pothole : potholes) {
-            motionModifier.addModel(pothole);
+        for (FatalPothole fatalPothole : fatalPotholes) {
+            motionModifier.addModel(fatalPothole);
         }
 
         new GroundMotionModifier(ground);
 
-        new PotholeSpawner(potholes, ground, car);
+        new FatalPotholeSpawner(fatalPotholes, ground, car);
 
-        new CollisionDetector(potholes, ground, car);
+        new FatalPotHoleCollisionDetector(fatalPotholes, ground, car);
     }
 }
