@@ -16,10 +16,6 @@ public final class Car extends LaneBasedModel {
     private static final String LOGTAG = Car.class.getSimpleName();
 
     private static final float carPadding = 20;
-    // Width of a zone
-    float zoneWidth;
-    // Width of a lane
-    float laneWidth;
 
     private Ground ground;
 
@@ -27,33 +23,27 @@ public final class Car extends LaneBasedModel {
         super(lane);
         this.ground = ground;
 
-        laneWidth = ground.metrics.getX();
-        zoneWidth = Config.WIDTH - ((Config.LANES - 1) * laneWidth);
-        zoneWidth /= Config.LANES;
+        float zoneWidth = Ground.getZoneWidth();
 
         metrics = new Vector(zoneWidth - carPadding * 2, 0);
         motion = new Vector(); // DO NOT USE THIS
 
-        setPositionByLane(lane);
+        calculatePositionByLane(lane);
     }
 
-    private void setPositionByLane(int lane) {
-        float x = lane * zoneWidth;
-        x += lane * laneWidth;
-        x += carPadding;
-
-        position = new Vector(x, Config.HEIGHT - metrics.getY() - 20);
+    private void calculatePositionByLane(int lane) {
+        position = Ground.calculateModelPositionByLane(lane).add(new Vector(carPadding, -20 - metrics.getY()));
     }
 
     public void goRight() {
         if (lane <= Config.LANES - 2) {
-            setPositionByLane(++lane);
+            calculatePositionByLane(++lane);
         }
     }
 
     public void goLeft() {
         if (lane > 0) {
-            setPositionByLane(--lane);
+            calculatePositionByLane(--lane);
         }
     }
 
