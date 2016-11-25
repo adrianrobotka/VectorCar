@@ -42,10 +42,6 @@ public final class MenuActivity extends Activity {
         initMenu();
 
         controller.setFps(Config.FPS);
-
-        if (!loaded) {
-            controller.init();
-        }
     }
 
     private void initMenu() {
@@ -61,9 +57,6 @@ public final class MenuActivity extends Activity {
 
     @Override
     protected void onResume() {
-        //TODO remove after test
-        controller.init();
-
         super.onResume();
     }
 
@@ -150,6 +143,8 @@ public final class MenuActivity extends Activity {
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            // new game
+                            controller.init();
                             Intent intent = new Intent(context, GameActivity.class);
                             context.startActivity(intent);
                         }
@@ -157,9 +152,11 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 1: {
+                    // load game
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            controller.init();
                             Intent intent = new Intent(context, GameActivity.class);
                             context.startActivity(intent);
                         }
@@ -167,6 +164,7 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 2: {
+                    // options
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -177,6 +175,7 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 3: {
+                    // help
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -187,6 +186,7 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 4: {
+                    // credits
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -197,6 +197,7 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 5: {
+                    // exit
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

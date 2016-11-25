@@ -56,23 +56,17 @@ public abstract class Controller {
         if (indicator != null)
             this.indicator = indicator;
 
-        // Create a worker thread for the model calculations
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Storage.clean();
+        Storage.clean();
 
-                createModels();
-                setProcessPercentage(50);
+        createModels();
+        setProcessPercentage(50);
 
-                createDrawers();
-                setProcessPercentage(70);
+        createDrawers();
+        setProcessPercentage(70);
 
-                createModifiers();
-                run = true;
-                setProcessPercentage(100);
-            }
-        }).start();
+        createModifiers();
+        run = true;
+        setProcessPercentage(100);
     }
 
     public void setDrawerCallback(Runnable drawerCallback) {

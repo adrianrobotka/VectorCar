@@ -7,7 +7,7 @@ import com.adrianrobotka.brick.Vector;
  */
 public final class FatalPothole extends LaneBasedModel {
     public FatalPothole(int lane) {
-        super(lane);
+        this.lane = lane;
         position = calculatePositionByLane(lane);
         metrics = new Vector(1, 1);
         motion = new Vector(0, 0);

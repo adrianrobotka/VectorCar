@@ -20,7 +20,7 @@ public final class Car extends LaneBasedModel {
     private Ground ground;
 
     public Car(int lane, Ground ground) {
-        super(lane);
+        this.lane = lane;
         this.ground = ground;
 
         float zoneWidth = Ground.getZoneWidth();
@@ -35,16 +35,29 @@ public final class Car extends LaneBasedModel {
         position = Ground.calculateModelPositionByLane(lane).add(new Vector(carPadding, -20 - metrics.getY()));
     }
 
+    /**
+     * Change lane right (if it is possible
+     */
     public void goRight() {
         if (lane <= Config.LANES - 2) {
             calculatePositionByLane(++lane);
         }
     }
 
+    /**
+     * Change lane left (if it is possible
+     */
     public void goLeft() {
         if (lane > 0) {
             calculatePositionByLane(--lane);
         }
+    }
+
+    /**
+     * Refresh car`s position
+     */
+    public void refresh() {
+        calculatePositionByLane(lane);
     }
 
     public void speedUp() {

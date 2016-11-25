@@ -32,8 +32,6 @@ public abstract class Model {
      */
     public String id = null;
 
-    // TODO What about attributes?
-
     /**
      * Create Model and add itself to the Storage
      */

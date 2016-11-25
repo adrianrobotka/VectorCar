@@ -3,14 +3,16 @@ package hu.pendroid.dnga.vectorcar;
 import com.adrianrobotka.brick.Controller;
 import com.adrianrobotka.brick.util.ProcessIndicator;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import hu.pendroid.dnga.vectorcar.model.Car;
-import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.model.Pothole;
 import hu.pendroid.dnga.vectorcar.modifier.MotionModifier;
 import hu.pendroid.dnga.vectorcar.view.CarDrawer;
 import hu.pendroid.dnga.vectorcar.view.GroundDrawer;
+import hu.pendroid.dnga.vectorcar.view.PotholesDrawer;
 
 final class AppController extends Controller {
     private static final String LOGTAG = AppController.class.getSimpleName();
@@ -18,7 +20,7 @@ final class AppController extends Controller {
 
     private Ground ground;
     private Car car;
-    private ArrayList<FatalPothole> potholes = new ArrayList<>();
+    private List<Pothole> potholes = new LinkedList<>();
 
     private AppController() {
     }
@@ -37,12 +39,16 @@ final class AppController extends Controller {
 
     protected void createModels() {
         ground = new Ground();
+        potholes.add(new Pothole()); // It`s enough, I think
+        potholes.add(new Pothole());
+        potholes.add(new Pothole());
         car = new Car(Config.LANES / 2, ground);
     }
 
     protected void createDrawers() {
         new GroundDrawer(ground);
         new CarDrawer(car);
+        new PotholesDrawer(potholes, ground);
     }
 
     protected void createModifiers() {

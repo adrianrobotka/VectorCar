@@ -6,9 +6,6 @@ import com.adrianrobotka.brick.Model;
  * Model based on lane
  */
 abstract class LaneBasedModel extends Model {
-    protected int lane;
+    int lane = 0;
 
-    LaneBasedModel(int lane) {
-        this.lane = lane;
-    }
 }
