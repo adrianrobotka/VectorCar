@@ -6,15 +6,20 @@ import com.adrianrobotka.brick.Vector;
  * The pothole that causes problem
  */
 public final class Pothole extends LaneBasedModel {
+    private static final float potholePadding = 20;
+
     public Pothole(int lane) {
         super(lane);
-        position = calculatePositionByLane(lane);
-        metrics = new Vector(1, 1);
+
+        float zoneWidth = Ground.getZoneWidth();
+
+        metrics = new Vector(zoneWidth - potholePadding * 2, 0);
         motion = new Vector(0, 0);
+
+        calculatePositionByLane(lane);
     }
 
-    private Vector calculatePositionByLane(int lane) {
-        //TODO implement this
-        return null;
+    private void calculatePositionByLane(int lane) {
+        position = Ground.calculateModelPositionByLane(lane).add(new Vector(potholePadding, 0));
     }
 }
