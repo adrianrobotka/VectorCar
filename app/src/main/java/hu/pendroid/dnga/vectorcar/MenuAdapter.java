@@ -2,7 +2,6 @@ package hu.pendroid.dnga.vectorcar;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,26 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
-/**
- * Created by robot on 2016. 11. 24..
- */
-
-public class MenuAdapter extends ArrayAdapter<ListItem>
+final class MenuAdapter extends ArrayAdapter<ListItem>
 {
-    List<ListItem> listItems = new ArrayList<>();
-    Context context;
+    private List<ListItem> listItems = new ArrayList<>();
+    private Context context;
 
-    public MenuAdapter(Context context, int textViewResourceId, List<ListItem> listItems) {
+    MenuAdapter(Context context, int textViewResourceId, List<ListItem> listItems) {
         super(context, textViewResourceId, listItems);
         this.listItems = listItems;
         this.context = context;
     }
 
+    @NonNull
     @Override
     public View getView(int position, final View convertView, ViewGroup parent) {
         View listItemView = convertView;
