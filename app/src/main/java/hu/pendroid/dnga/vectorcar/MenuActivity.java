@@ -6,9 +6,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.adrianrobotka.brick.util.ProcessIndicator;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class MenuActivity extends Activity {
     private AppController controller = AppController.getInstance();
@@ -20,27 +24,30 @@ public final class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        final ProgressBar progress = (ProgressBar) findViewById(R.id.initProgressBar);
-        ProcessIndicator indicator = new ProcessIndicator() {
-            @Override
-            public void setProcessPercentage(final int percentage) {
-                progress.setProgress(percentage);
-                if (percentage == 100)
-                    loaded = true;
-            }
-        };
 
-        controller.setFps(Config.FPS);
+
+        ListView listView = (ListView) findViewById(R.id.listView);
+
+        List<ListItem> listItems = new ArrayList<>();
+
+        for(int i = 0; i < ListItem.labelResources.length; i++) {
+            listItems.add(new ListItem(getString(ListItem.labelResources[i]),ListItem.imageResources[i], ListItem.colorResources[i]));
+        }
+
+        MenuAdapter menuAdapter = new MenuAdapter(this, R.layout.list_item, listItems);
+        listView.setAdapter(menuAdapter);
+
+        /*controller.setFps(Config.FPS);
         controller.setIndicator(indicator);
 
-        setCallbacks();
+        //setCallbacks();
 
         if (!loaded) {
             controller.init();
-        }
+        }*/
     }
 
-    private void setCallbacks() {
+    /*private void setCallbacks() {
         Button newGameButton = (Button) findViewById(R.id.newGameButton);
         newGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +59,7 @@ public final class MenuActivity extends Activity {
                 startActivity(intent);
             }
         });
-    }
+    }*/
 
     @Override
     protected void onResume() {

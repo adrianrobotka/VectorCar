@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#838383</color>
+    <color name="colorPrimaryDark">#1d1d1d</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGameBackground">#838383</color>
-    <color name="colorMenuBackground">#5e77ff</color>
+    <color name="colorMenuBackground">#838383</color>
     <color name="colorGameSeparatingLane">#ffffff</color>
     <color name="colorGameSolidLane">#ff5e63</color>
     <color name="colorGameOverText">#ffffff</color>
+    <color name="colorMenuText">#ffffff</color>
     <color name="menuColor1">#323232</color>
     <color name="menuColor2">#3b3b3b</color>
     <color name="menuColor3">#474747</color>
     <color name="menuColor4">#535353</color>
     <color name="menuColor5">#5e5e5e</color>
+    <color name="menuColor6">#6e6e6e</color>
 </resources>

@@ -10,17 +10,11 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/colorMenuBackground">
 
-        <ProgressBar
-            android:id="@+id/initProgressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="center_horizontal|top" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            pa
+
             android:id="@+id/listView"/>
 
 
