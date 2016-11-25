@@ -23,7 +23,7 @@ public final class Config {
     /**
      * Number of lanes
      */
-    public static final int LANES = 4;
+    public static final int LANES = 3;
 
 
 }
