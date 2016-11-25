@@ -39,7 +39,7 @@ public final class Car extends LaneBasedModel {
      * Change lane right (if it is possible
      */
     public void goRight() {
-        if (lane <= Config.LANES - 2) {
+        if (ground.motion.getY() > Config.MIN_CONTROL_SPEED && lane <= Config.LANES - 2) {
             calculatePositionByLane(++lane);
         }
     }
@@ -48,7 +48,7 @@ public final class Car extends LaneBasedModel {
      * Change lane left (if it is possible
      */
     public void goLeft() {
-        if (lane > 0) {
+        if (ground.motion.getY() > Config.MIN_CONTROL_SPEED && lane > 0) {
             calculatePositionByLane(--lane);
         }
     }

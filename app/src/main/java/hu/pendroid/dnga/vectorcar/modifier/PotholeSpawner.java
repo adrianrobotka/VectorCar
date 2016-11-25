@@ -31,26 +31,44 @@ public class PotholeSpawner extends Modifier {
     public void doRound() throws GameException {
         List<Pothole> freePotholes = getFreePotholes();
 
-        if (time % (Config.FPS * 2) == 0) {
-            time = 0;
+        decreaseBlocks();
+
+        float laneSpawnSleep;
+
+        if (ground.motion.getY() > 60)
+            laneSpawnSleep = 0.5f;
+        else if (ground.motion.getY() > 40)
+            laneSpawnSleep = 1;
+        else if (ground.motion.getY() > 20)
+            laneSpawnSleep = 2;
+        else if (ground.motion.getY() > 10)
+            laneSpawnSleep = 3;
+        else if (ground.motion.getY() > 5)
+            laneSpawnSleep = 4;
+        else if (ground.motion.getY() > 2)
+            laneSpawnSleep = 5;
+        else
+            laneSpawnSleep = 7;
+
+        if (time % (int) (Config.FPS * laneSpawnSleep) == 0) {
 
             int lane = car.getLane();
 
-            if (spawnBlock[lane] == 0) {
-                spawnBlock[lane] = (int) Config.FPS;
+            if (spawnBlock[lane] == 0 && freePotholes.size() > 0) {
+                spawnBlock[lane] = (int) (Config.FPS * laneSpawnSleep);
                 freePotholes.get(0).spawn(lane);
             }
-
-            decreaseBlocks();
-            time++;
         }
+
+        time++;
     }
 
     private void decreaseBlocks() {
-        if (ground.motion.getY() != 0) {
-            for (int i = 0; i < potholes.size(); i++) {
-                if (spawnBlock[i] > 0) {
-                    spawnBlock[i]--;
+        if (ground.motion.getY() > 1) {
+            for (int i = 0; i < spawnBlock.length; i++) {
+                spawnBlock[i]--;
+                if (spawnBlock[i] < 0) {
+                    spawnBlock[i] = 0;
                 }
             }
         }

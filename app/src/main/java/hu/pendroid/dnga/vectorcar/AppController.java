@@ -42,7 +42,7 @@ final class AppController extends Controller {
     protected void createModels() {
         ground = new Ground();
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
             potholes.add(new Pothole(ground));
 
         car = new Car(Config.LANES / 2, ground);

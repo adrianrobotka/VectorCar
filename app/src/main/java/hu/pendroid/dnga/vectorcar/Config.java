@@ -31,9 +31,14 @@ public final class Config {
     /**
      * Max speed of the car
      */
-    public static final float MAX_SPEED = 10;
+    public static final float MAX_SPEED = 30;
     /**
      * Smallest spped unit (unit of the negative acceleration)
      */
     public static final float SMALLEST_SPEED = 0.5f;
+
+    /**
+     * Min speed to control the car
+     */
+    public static final float MIN_CONTROL_SPEED = 0.5f;
 }
