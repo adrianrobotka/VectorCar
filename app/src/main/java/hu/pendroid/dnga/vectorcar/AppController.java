@@ -3,8 +3,12 @@ package hu.pendroid.dnga.vectorcar;
 import com.adrianrobotka.brick.Controller;
 import com.adrianrobotka.brick.util.ProcessIndicator;
 
+import java.util.ArrayList;
+
 import hu.pendroid.dnga.vectorcar.model.Car;
+import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.modifier.MotionModifier;
 import hu.pendroid.dnga.vectorcar.view.CarDrawer;
 import hu.pendroid.dnga.vectorcar.view.GroundDrawer;
 
@@ -14,6 +18,7 @@ final class AppController extends Controller {
 
     private Ground ground;
     private Car car;
+    private ArrayList<FatalPothole> potholes = new ArrayList<>();
 
     private AppController() {
     }
@@ -32,15 +37,16 @@ final class AppController extends Controller {
 
     protected void createModels() {
         ground = new Ground();
-        car = new Car();
+        car = new Car(Config.LANES / 2, ground);
     }
 
     protected void createDrawers() {
-        new GroundDrawer(car);
+        new GroundDrawer(ground);
         new CarDrawer(car);
     }
 
     protected void createModifiers() {
-
+        MotionModifier motionModifier = new MotionModifier();
+        motionModifier.addModel(ground);
     }
 }
