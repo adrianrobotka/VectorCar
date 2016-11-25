@@ -1,17 +1,20 @@
 package hu.pendroid.dnga.vectorcar.model;
 
-import com.adrianrobotka.brick.Model;
 import com.adrianrobotka.brick.Vector;
 
-import hu.pendroid.dnga.vectorcar.Config;
-
 /**
- * The Pothole
+ * The pothole that causes problem
  */
-public final class Pothole extends Model {
-    public Pothole(Vector position) {
-        this.position = position;
+public final class Pothole extends LaneBasedModel {
+    public Pothole(int lane) {
+        super(lane);
+        position = calculatePositionByLane(lane);
         metrics = new Vector(1, 1);
-        motion = new Vector(Config.INITIAL_CAR_SPEED, 0);
+        motion = new Vector(0, 0);
+    }
+
+    private Vector calculatePositionByLane(int lane) {
+        //TODO implement this
+        return null;
     }
 }

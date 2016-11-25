@@ -3,17 +3,18 @@ package hu.pendroid.dnga.vectorcar.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import com.adrianrobotka.brick.Drawer;
 import com.adrianrobotka.brick.MainDrawer;
 
-import hu.pendroid.dnga.vectorcar.Config;
-
 /**
  * Draw game
  */
 public final class GameDrawer extends MainDrawer {
+    private static final String LOGTAG = GameDrawer.class.getSimpleName();
+
     /**
      * Creates GameDrawer
      *
@@ -21,20 +22,20 @@ public final class GameDrawer extends MainDrawer {
      */
     public GameDrawer(Context context) {
         super(context);
-        init(context);
+        construct(context);
     }
 
     public GameDrawer(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
+        construct(context);
     }
 
     public GameDrawer(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        construct(context);
     }
 
-    private void init(Context context) {
+    private void construct(Context context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB)
             setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
@@ -49,8 +50,13 @@ public final class GameDrawer extends MainDrawer {
 
         preDrawers(canvas);
 
-        for (Drawer drawer : getDrawers())
-            drawer.draw(canvas);
+        try {
+            for (Drawer drawer : getDrawers())
+                drawer.draw(canvas);
+        } catch (NullPointerException e) {
+            Log.e(LOGTAG, "A drawer failed:");
+            Log.e(LOGTAG, e.getMessage());
+        }
 
         postDrawers(canvas);
     }
@@ -61,13 +67,6 @@ public final class GameDrawer extends MainDrawer {
      * @param canvas to draw on
      */
     private void preDrawers(Canvas canvas) {
-        int screenWidth = getWidth();
-        float gameWidth = Config.WIDTH;
-        float scale = screenWidth / gameWidth;
-        canvas.scale(scale, scale);
-
-        // Set full abstract height of the screen (calculated from the width)
-        Config.HEIGHT = Config.WIDTH * getHeight() / getWidth();
     }
 
     /**
