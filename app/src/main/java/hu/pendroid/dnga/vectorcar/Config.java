@@ -24,6 +24,10 @@ public final class Config {
      * Number of lanes
      */
     public static final int LANES = 3;
+    /**
+     * Min lenght of a control gesture
+     */
+    public static final float MIN_GESTURE_LENGTH = WIDTH / 5;
 
 
 }

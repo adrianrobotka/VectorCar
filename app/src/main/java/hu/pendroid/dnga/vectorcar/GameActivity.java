@@ -160,19 +160,16 @@ public final class GameActivity extends Activity implements
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         detector.onTouchEvent(event);
-        // Be sure to call the superclass implementation
         return super.onTouchEvent(event);
     }
 
     @Override
     public boolean onDown(MotionEvent event) {
-        //Log.d(LOGTAG, "onDown: " + event.toString());
         return true;
     }
 
     @Override
     public void onShowPress(MotionEvent motionEvent) {
-        //Log.d(LOGTAG, "onShowPress() ");
     }
 
     @Override
@@ -181,22 +178,48 @@ public final class GameActivity extends Activity implements
     }
 
     @Override
-    public boolean onFling(MotionEvent event1, MotionEvent event2,
-                           float velocityX, float velocityY) {
-        Log.d(LOGTAG, "xonFling: " + event1.getX() + ", " + event1.getY());
-        Log.d(LOGTAG, "-onFling: " + event2.getX() + ", " + event2.getY());
+    public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
+        float x1 = event1.getX();
+        float y1 = Config.HEIGHT - event1.getY();
+        float x2 = event2.getX();
+        float y2 = Config.HEIGHT - event2.getY();
+
+        float dX = x2 - x1;
+        float dY = y2 - y1;
+
+
+        float lenght = (float) Math.sqrt(dX * dX + dY * dY);
+
+        if (lenght >= Config.MIN_GESTURE_LENGTH) {
+
+
+            if (Math.abs(dX) > Math.abs(dY)) {
+                if (dX > 0) {
+                    //right
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> RIGHT");
+                } else {
+                    //left
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> LEFT");
+                }
+            } else {
+                if (dY > 0) {
+                    //up
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> UP");
+                } else {
+                    //down
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> DOWN");
+                }
+            }
+        }
         return true;
     }
 
     @Override
     public void onLongPress(MotionEvent event) {
-        Log.d(LOGTAG, "onLongPress: " + event.toString());
     }
 
     @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-                            float distanceY) {
-        //Log.d(LOGTAG, "onScroll: " + e1.toString() + e2.toString());
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return true;
     }
 
