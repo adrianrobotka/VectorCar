@@ -21,13 +21,15 @@ import static com.adrianrobotka.brick.Storage.getModels;
 public final class GameActivity extends Activity implements
         GestureDetector.OnGestureListener {
     private static final String LOGTAG = GameActivity.class.getSimpleName();
+    private int currentApiVersion;
+
     private GameDrawer drawer;
     private TextView velocityInfoText;
     private TextView roadInfoText;
     private AppController controller = AppController.getInstance();
     private GestureDetectorCompat detector;
 
-    private int currentApiVersion;
+    private Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public final class GameActivity extends Activity implements
 
         setCallbacks();
 
+        car = (Car) getModels(Car.class).get(0);
         detector = new GestureDetectorCompat(this, this);
     }
 
@@ -187,26 +190,33 @@ public final class GameActivity extends Activity implements
         float dX = x2 - x1;
         float dY = y2 - y1;
 
+        float length = (float) Math.sqrt(dX * dX + dY * dY);
 
-        float lenght = (float) Math.sqrt(dX * dX + dY * dY);
-
-        if (lenght >= Config.MIN_GESTURE_LENGTH) {
+        if (length >= Config.MIN_GESTURE_LENGTH) {
 
 
             if (Math.abs(dX) > Math.abs(dY)) {
                 if (dX > 0) {
                     //right
+                    car.goRight();
+
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> RIGHT");
                 } else {
                     //left
+                    car.goLeft();
+
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> LEFT");
                 }
             } else {
                 if (dY > 0) {
                     //up
+                    car.speedUp();
+
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> UP");
                 } else {
                     //down
+                    car.brake();
+
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> DOWN");
                 }
             }

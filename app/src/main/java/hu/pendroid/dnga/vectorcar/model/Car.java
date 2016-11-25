@@ -38,8 +38,23 @@ public final class Car extends LaneBasedModel {
         position = new Vector(x, Config.HEIGHT - metrics.getY() - 20);
     }
 
-    public void changeLane(int lane) {
-        this.lane = lane;
-        setPositionByLane(lane);
+    public void goRight() {
+        if (lane <= Config.LANES - 2) {
+            setPositionByLane(++lane);
+        }
+    }
+
+    public void goLeft() {
+        if (lane > 0) {
+            setPositionByLane(--lane);
+        }
+    }
+
+    public void speedUp() {
+
+    }
+
+    public void brake() {
+
     }
 }
