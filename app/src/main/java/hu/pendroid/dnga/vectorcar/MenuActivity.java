@@ -38,7 +38,7 @@ public final class MenuActivity extends Activity {
             listItems.add(new ListItem(getString(labelResources[i]),imageResources[i], colorResources[i]));
         }
 
-        MenuAdapter menuAdapter = new MenuAdapter(this, R.layout.list_item, listItems);
+        MenuAdapter menuAdapter = new MenuAdapter(getBaseContext(), R.layout.list_item, listItems);
         listView.setAdapter(menuAdapter);
 
 

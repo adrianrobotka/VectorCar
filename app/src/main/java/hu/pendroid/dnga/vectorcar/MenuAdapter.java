@@ -3,10 +3,14 @@ package hu.pendroid.dnga.vectorcar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,6 +55,10 @@ public class MenuAdapter extends ArrayAdapter<ListItem>
         imageView.setImageResource(image);
         listItemView.setBackgroundResource(color);
         textView.setText(labelString);
+
+        float width = context.getResources().getDisplayMetrics().widthPixels;
+        float row_hight = (float)context.getResources().getDimension(R.dimen.list_item_hight);
+        //listItemView.animate(new TranslateAnimation(width, row_hight*position, 0, row_hight*position)).start();
 
         switch (position) {
             case 0: {
@@ -107,7 +115,7 @@ public class MenuAdapter extends ArrayAdapter<ListItem>
                 listItemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        System.exit(0);
                     }
                 });
                 break;

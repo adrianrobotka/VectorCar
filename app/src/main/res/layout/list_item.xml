@@ -4,11 +4,11 @@
                 android:id="@+id/layout"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="70dp">
+              android:layout_height="@dimen/list_item_hight">
 
     <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/list_item_hight"
+        android:layout_height="@dimen/list_item_hight"
         android:id="@+id/imageView"
         android:src="@drawable/pothole_fatal"
         android:scaleX="0.7"
