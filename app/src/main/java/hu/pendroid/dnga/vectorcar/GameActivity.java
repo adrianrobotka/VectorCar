@@ -46,10 +46,10 @@ public final class GameActivity extends Activity implements
     }
 
     private void refreshInfoPanel() {
-        Car car = (Car) getModels(Car.class).get(0);
         Ground ground = (Ground) getModels(Ground.class).get(0);
-        int road = (int) ground.position.getY() / 100;
-        int speed = (int) Math.abs(car.motion.getY());
+        final int multiplier = 3;
+        int road = (int) (ground.position.getY() / Config.FPS * multiplier);
+        int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
     }
@@ -109,10 +109,6 @@ public final class GameActivity extends Activity implements
     protected void onPause() {
         super.onPause();
         controller.stop();
-    }
-
-    public void refresh() {
-        drawer.invalidate();
     }
 
     private void hideNavigationBar() {
@@ -210,12 +206,22 @@ public final class GameActivity extends Activity implements
             } else {
                 if (dY > 0) {
                     //up
-                    car.speedUp();
+                    if (dY > Config.HEIGHT / 4)
+                        car.speedUp(3);
+                    else if (dY > Config.HEIGHT / 6)
+                        car.speedUp(2);
+                    else
+                        car.speedUp();
 
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> UP");
                 } else {
                     //down
-                    car.brake();
+                    if (-dY > Config.HEIGHT / 4)
+                        car.brake(3);
+                    else if (-dY > Config.HEIGHT / 6)
+                        car.brake(2);
+                    else
+                        car.brake();
 
                     Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> DOWN");
                 }

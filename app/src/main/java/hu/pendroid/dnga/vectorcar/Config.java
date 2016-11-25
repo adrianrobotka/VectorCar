@@ -28,6 +28,12 @@ public final class Config {
      * Min lenght of a control gesture
      */
     public static final float MIN_GESTURE_LENGTH = WIDTH / 5;
-
-
+    /**
+     * Max speed of the car
+     */
+    public static final float MAX_SPEED = 6;
+    /**
+     * Smallest spped unit (unit of the negative acceleration)
+     */
+    public static final float SMALLEST_SPEED = 0.5f;
 }
