@@ -9,7 +9,6 @@ import android.graphics.Canvas;
 import com.adrianrobotka.brick.Drawer;
 import com.adrianrobotka.brick.Vector;
 
-import hu.pendroid.dnga.vectorcar.Config;
 import hu.pendroid.dnga.vectorcar.R;
 import hu.pendroid.dnga.vectorcar.model.Car;
 
@@ -39,7 +38,9 @@ public class CarDrawer extends Drawer {
         float newHeight = (int) (groundBitmap.getHeight() * scale);
         car.metrics = new Vector(newWidth, newHeight);
 
-        car.changeLane(Config.LANES / 2);
+        // Just refresh car`s position
+        car.goRight();
+        car.goLeft();
     }
 
     @Override

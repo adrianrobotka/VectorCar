@@ -21,13 +21,15 @@ import static com.adrianrobotka.brick.Storage.getModels;
 public final class GameActivity extends Activity implements
         GestureDetector.OnGestureListener {
     private static final String LOGTAG = GameActivity.class.getSimpleName();
+    private int currentApiVersion;
+
     private GameDrawer drawer;
     private TextView velocityInfoText;
     private TextView roadInfoText;
     private AppController controller = AppController.getInstance();
     private GestureDetectorCompat detector;
 
-    private int currentApiVersion;
+    private Car car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +41,15 @@ public final class GameActivity extends Activity implements
 
         setCallbacks();
 
+        car = (Car) getModels(Car.class).get(0);
         detector = new GestureDetectorCompat(this, this);
     }
 
     private void refreshInfoPanel() {
-        Car car = (Car) getModels(Car.class).get(0);
         Ground ground = (Ground) getModels(Ground.class).get(0);
-        int road = (int) ground.position.getY() / 100;
-        int speed = (int) Math.abs(car.motion.getY());
+        final int multiplier = 3;
+        int road = (int) (ground.position.getY() / Config.FPS * multiplier);
+        int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
     }
@@ -108,10 +111,6 @@ public final class GameActivity extends Activity implements
         controller.stop();
     }
 
-    public void refresh() {
-        drawer.invalidate();
-    }
-
     private void hideNavigationBar() {
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
 
@@ -160,19 +159,16 @@ public final class GameActivity extends Activity implements
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         detector.onTouchEvent(event);
-        // Be sure to call the superclass implementation
         return super.onTouchEvent(event);
     }
 
     @Override
     public boolean onDown(MotionEvent event) {
-        //Log.d(LOGTAG, "onDown: " + event.toString());
         return true;
     }
 
     @Override
     public void onShowPress(MotionEvent motionEvent) {
-        //Log.d(LOGTAG, "onShowPress() ");
     }
 
     @Override
@@ -181,22 +177,65 @@ public final class GameActivity extends Activity implements
     }
 
     @Override
-    public boolean onFling(MotionEvent event1, MotionEvent event2,
-                           float velocityX, float velocityY) {
-        Log.d(LOGTAG, "xonFling: " + event1.getX() + ", " + event1.getY());
-        Log.d(LOGTAG, "-onFling: " + event2.getX() + ", " + event2.getY());
+    public boolean onFling(MotionEvent event1, MotionEvent event2, float velocityX, float velocityY) {
+        float x1 = event1.getX();
+        float y1 = Config.HEIGHT - event1.getY();
+        float x2 = event2.getX();
+        float y2 = Config.HEIGHT - event2.getY();
+
+        float dX = x2 - x1;
+        float dY = y2 - y1;
+
+        float length = (float) Math.sqrt(dX * dX + dY * dY);
+
+        if (length >= Config.MIN_GESTURE_LENGTH) {
+
+
+            if (Math.abs(dX) > Math.abs(dY)) {
+                if (dX > 0) {
+                    //right
+                    car.goRight();
+
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> RIGHT");
+                } else {
+                    //left
+                    car.goLeft();
+
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> LEFT");
+                }
+            } else {
+                if (dY > 0) {
+                    //up
+                    if (dY > Config.HEIGHT / 4)
+                        car.speedUp(3);
+                    else if (dY > Config.HEIGHT / 6)
+                        car.speedUp(2);
+                    else
+                        car.speedUp();
+
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> UP");
+                } else {
+                    //down
+                    if (-dY > Config.HEIGHT / 4)
+                        car.brake(3);
+                    else if (-dY > Config.HEIGHT / 6)
+                        car.brake(2);
+                    else
+                        car.brake();
+
+                    Log.d(LOGTAG, "Gesture: (" + x1 + ", " + y1 + "), (" + x2 + ", " + y2 + ") -> DOWN");
+                }
+            }
+        }
         return true;
     }
 
     @Override
     public void onLongPress(MotionEvent event) {
-        Log.d(LOGTAG, "onLongPress: " + event.toString());
     }
 
     @Override
-    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
-                            float distanceY) {
-        //Log.d(LOGTAG, "onScroll: " + e1.toString() + e2.toString());
+    public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return true;
     }
 

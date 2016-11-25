@@ -17,6 +17,6 @@ public final class Ground extends Model {
         metrics = new Vector(20, 150);
 
         // motion of the lanes
-        motion = new Vector(0, 2);
+        motion = new Vector();
     }
 }

@@ -108,14 +108,11 @@ public abstract class Controller {
                 // Reduce load
                 try {
                     Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ignored) {
                 }
 
-                // TODO Is it thread safe?
                 long before, after;
                 while (run) {
-                    // TODO Is it worth?
                     before = System.currentTimeMillis();
                     try {
                         doRound();
@@ -129,8 +126,8 @@ public abstract class Controller {
                     try {
                         // Can lead exception
                         Thread.sleep(waitPerFrame - (after - before));
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    } catch (Exception ignored) {
+
                     }
                 }
             }
