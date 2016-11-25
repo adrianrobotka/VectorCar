@@ -10,6 +10,6 @@
     <string name="menu_item5">Credits</string>
     <string name="menu_item6">Exit</string>
     <string name="back_button">Back</string>
-    <string name="credits_text">This game was developed for the contest of University of Pannon by Don't never give app team</string>
+    <string name="credits_text">This game was developed for the contest of University of Pannon by Don\'t never give app team</string>
     <string name="help_text">Swipe right or left to switch between lanes, up to accelerate, down to brake!</string>
 </resources>

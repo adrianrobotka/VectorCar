@@ -170,7 +170,7 @@ public final class MenuActivity extends Activity {
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(context, GameActivity.class);
+                            Intent intent = new Intent(context, OptionsActivity.class);
                             context.startActivity(intent);
                         }
                     });
