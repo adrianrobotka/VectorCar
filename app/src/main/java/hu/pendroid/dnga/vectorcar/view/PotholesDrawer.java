@@ -40,7 +40,7 @@ public class PotholesDrawer extends Drawer {
         Resources res = context.getResources();
         potholeBitmap = BitmapFactory.decodeResource(res, R.drawable.pothole_light);
 
-        Pothole firstPothole = potholes.get(1);
+        Pothole firstPothole = potholes.get(0);
 
         float scale = firstPothole.metrics.getX() / potholeBitmap.getWidth();
         float newWidth = (int) (potholeBitmap.getWidth() * scale);
@@ -56,9 +56,9 @@ public class PotholesDrawer extends Drawer {
     @Override
     public void draw(Canvas canvas) {
         for (Pothole pothole : potholes) {
-            float y = pothole.position.getY() - ground.position.getY();
-            if (y > 0 && y < Config.HEIGHT) {
-                canvas.drawBitmap(potholeBitmap, pothole.position.getX(), pothole.position.getY(), null);
+            float y = ground.position.getY() + pothole.position.getY();
+            if (y >= -pothole.metrics.getY() && y <= Config.HEIGHT) {
+                canvas.drawBitmap(potholeBitmap, pothole.position.getX(), y, null);
             }
         }
     }

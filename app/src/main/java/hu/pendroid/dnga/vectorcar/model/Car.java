@@ -32,7 +32,7 @@ public final class Car extends LaneBasedModel {
     }
 
     private void calculatePositionByLane(int lane) {
-        position = Ground.calculateModelPositionByLane(lane).add(new Vector(carPadding, -20 - metrics.getY()));
+        position = Ground.calculateModelPositionByLane(lane).add(new Vector(carPadding, Config.HEIGHT - metrics.getY() - 20));
     }
 
     /**

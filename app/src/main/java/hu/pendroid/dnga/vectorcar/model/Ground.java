@@ -24,7 +24,7 @@ public final class Ground extends Model {
         metrics = new Vector(laneWidth, laneHeight);
 
         // motion of the lanes
-        motion = new Vector(0, 1);
+        motion = new Vector();
 
         zoneWidth = Config.WIDTH - ((Config.LANES - 1) * laneWidth);
         zoneWidth /= Config.LANES;
@@ -38,6 +38,6 @@ public final class Ground extends Model {
         float x = lane * zoneWidth;
         x += lane * laneWidth;
         // Padding is missing from the X value (post correction needed!)
-        return new Vector(x, Config.HEIGHT);
+        return new Vector(x, 0);
     }
 }
