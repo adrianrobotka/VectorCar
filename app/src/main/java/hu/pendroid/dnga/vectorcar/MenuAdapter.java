@@ -1,6 +1,7 @@
 package hu.pendroid.dnga.vectorcar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class MenuAdapter extends ArrayAdapter<ListItem>
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         View listItemView = convertView;
 
         ListItem listItem = getItem(position);
@@ -50,6 +51,68 @@ public class MenuAdapter extends ArrayAdapter<ListItem>
         imageView.setImageResource(image);
         listItemView.setBackgroundResource(color);
         textView.setText(labelString);
+
+        switch (position) {
+            case 0: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, GameActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            }
+            case 1: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, GameActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            }
+            case 2: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, GameActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            }
+            case 3: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, HelpActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            }
+            case 4: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(context, CreditsActivity.class);
+                        context.startActivity(intent);
+                    }
+                });
+                break;
+            }
+            case 5: {
+                listItemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                });
+                break;
+            }
+        }
 
         return listItemView;
     }

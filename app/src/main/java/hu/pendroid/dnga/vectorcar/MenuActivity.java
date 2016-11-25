@@ -19,6 +19,10 @@ public final class MenuActivity extends Activity {
     private boolean loaded;
     private int currentApiVersion;
 
+    public static final int imageResources[] = { R.drawable.play_icon, R.drawable.continue_icon, R.drawable.options_icon, R.drawable.help_icon, R.drawable.credits_icon,R.drawable.exit_icon };
+    public static final int colorResources[] = { R.color.menuColor1, R.color.menuColor2, R.color.menuColor3, R.color.menuColor4, R.color.menuColor5, R.color.menuColor6};
+    public static final int labelResources[] = { R.string.menu_item1, R.string.menu_item2, R.string.menu_item3, R.string.menu_item4, R.string.menu_item5, R.string.menu_item6 };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,17 +34,19 @@ public final class MenuActivity extends Activity {
 
         List<ListItem> listItems = new ArrayList<>();
 
-        for(int i = 0; i < ListItem.labelResources.length; i++) {
-            listItems.add(new ListItem(getString(ListItem.labelResources[i]),ListItem.imageResources[i], ListItem.colorResources[i]));
+        for(int i = 0; i < labelResources.length; i++) {
+            listItems.add(new ListItem(getString(labelResources[i]),imageResources[i], colorResources[i]));
         }
 
         MenuAdapter menuAdapter = new MenuAdapter(this, R.layout.list_item, listItems);
         listView.setAdapter(menuAdapter);
 
+
+
         /*controller.setFps(Config.FPS);
         controller.setIndicator(indicator);
 
-        //setCallbacks();
+        setCallbacks();
 
         if (!loaded) {
             controller.init();
