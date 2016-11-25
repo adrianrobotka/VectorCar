@@ -3,6 +3,7 @@
     <string name="new_game_button">New game</string>
     <string name="title_activity_game">GameActivity</string>
     <string name="game_over">GameOver</string>
+    <string name="puncture">PUNCTURE</string>
     <string name="menu_item1">New Game</string>
     <string name="menu_item2">Load Game</string>
     <string name="menu_item3">Options</string>

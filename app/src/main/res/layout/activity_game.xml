@@ -71,6 +71,22 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/punctureText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/puncture"
+                    android:textColor="@color/colorPunctureText"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
         </FrameLayout>
 
     </LinearLayout>

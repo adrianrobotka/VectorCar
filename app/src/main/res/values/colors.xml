@@ -17,4 +17,5 @@
     <color name="menuColor6">#6e6e6e</color>
     <color name="colorButtonText">#ffffff</color>
     <color name="colorInfoPanelBackground">#323232</color>
+    <color name="colorPunctureText">#fa0000</color>
 </resources>

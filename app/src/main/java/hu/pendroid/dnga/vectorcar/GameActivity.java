@@ -26,6 +26,7 @@ public final class GameActivity extends Activity implements
     private GameDrawer drawer;
     private TextView velocityInfoText;
     private TextView roadInfoText;
+    private TextView punctureText;
     private AppController controller = AppController.getInstance();
     private GestureDetectorCompat detector;
 
@@ -58,6 +59,7 @@ public final class GameActivity extends Activity implements
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
         velocityInfoText = (TextView) findViewById(R.id.velocityInfoText);
         roadInfoText = (TextView) findViewById(R.id.roadInfoText);
+        punctureText = (TextView) findViewById(R.id.punctureText);
 
         controller.setDrawerCallback(new Runnable() {
             @Override
