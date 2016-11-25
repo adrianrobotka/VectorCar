@@ -48,7 +48,7 @@ public class FatalPotholeSpawner extends Modifier {
         else if (ground.motion.getY() > 2)
             laneSpawnSleep = 5;
         else
-            laneSpawnSleep = 7;
+            laneSpawnSleep = 10;
 
         if (time % (int) (Config.FPS * laneSpawnSleep) == 0) {
 

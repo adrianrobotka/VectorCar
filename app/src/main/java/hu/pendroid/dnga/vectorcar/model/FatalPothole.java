@@ -8,7 +8,7 @@ import hu.pendroid.dnga.vectorcar.Config;
  * The pothole that causes problem on the car
  */
 public final class FatalPothole extends LaneBasedModel {
-    private float potholePadding = 20;
+    public static final float potholePadding = 20;
     private Ground ground;
 
     public FatalPothole(Ground ground) {
@@ -28,10 +28,6 @@ public final class FatalPothole extends LaneBasedModel {
     public boolean isOnTheRoad() {
         float y = ground.position.getY() - position.getY();
         return y <= Config.HEIGHT && y >= -metrics.getY();
-    }
-
-    public float getPotholePadding() {
-        return potholePadding;
     }
 
     /**

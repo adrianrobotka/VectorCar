@@ -37,6 +37,7 @@ final class AppController extends Controller {
 
     @Override
     public void init(ProcessIndicator indicator) throws IllegalStateException {
+        fatalPotholes.clear();
         super.init(indicator);
     }
 

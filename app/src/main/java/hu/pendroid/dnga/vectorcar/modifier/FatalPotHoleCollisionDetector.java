@@ -29,9 +29,13 @@ public final class FatalPotHoleCollisionDetector extends Modifier {
         if (car.getLane() != fatalPothole.getLane())
             return false;
 
-        float y = ground.position.getY() - fatalPothole.position.getY() + fatalPothole.metrics.getY() - fatalPothole.getPotholePadding() / 4;
-        return y > car.position.getY();
+        if (car.position.getY() + car.metrics.getY() < fatalPothole.position.getY())
+            return false;
 
+        float potholeScreenY = ground.position.getY() - fatalPothole.position.getY();
+        potholeScreenY += fatalPothole.metrics.getY();
+
+        return car.position.getY() < potholeScreenY;
     }
 
     @Override
