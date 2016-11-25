@@ -20,4 +20,9 @@ public class HelpActivity extends Activity {
             }
         });
     }
+
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
 }

@@ -1,10 +1,20 @@
 package hu.pendroid.dnga.vectorcar;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationSet;
+import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,25 +24,22 @@ public final class MenuActivity extends Activity {
     public static final int colorResources[] = {R.color.menuColor1, R.color.menuColor2, R.color.menuColor3, R.color.menuColor4, R.color.menuColor5, R.color.menuColor6};
     public static final int labelResources[] = {R.string.menu_item1, R.string.menu_item2, R.string.menu_item3, R.string.menu_item4, R.string.menu_item5, R.string.menu_item6};
     private AppController controller = AppController.getInstance();
-    private boolean loaded;
     private int currentApiVersion;
+    private boolean loaded = false;
+
+    private MenuAdapter menuAdapter;
+    private ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
+        listView = (ListView) findViewById(R.id.listView);
 
-        ListView listView = (ListView) findViewById(R.id.listView);
+        hideNavigationBar();
 
-        List<ListItem> listItems = new ArrayList<>();
-
-        for (int i = 0; i < labelResources.length; i++) {
-            listItems.add(new ListItem(getString(labelResources[i]), imageResources[i], colorResources[i]));
-        }
-
-        MenuAdapter menuAdapter = new MenuAdapter(getBaseContext(), R.layout.list_item, listItems);
-        listView.setAdapter(menuAdapter);
+        initMenu();
 
         controller.setFps(Config.FPS);
 
@@ -41,10 +48,22 @@ public final class MenuActivity extends Activity {
         }
     }
 
+    private void initMenu() {
+        List<MenuListItem> menuListItems = new ArrayList<>();
+
+        for (int i = 0; i < labelResources.length; i++) {
+            menuListItems.add(new MenuListItem(getString(labelResources[i]), imageResources[i], colorResources[i]));
+        }
+        menuAdapter = new MenuAdapter(this, R.layout.list_item, menuListItems);
+
+        listView.setAdapter(menuAdapter);
+    }
+
     @Override
     protected void onResume() {
         //TODO remove after test
         controller.init();
+
         super.onResume();
     }
 
@@ -91,5 +110,126 @@ public final class MenuActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    class MenuAdapter extends ArrayAdapter<MenuListItem> {
+        private List<MenuListItem> menuListItems = new ArrayList<>();
+        private Context context;
+
+        MenuAdapter(Context context, int textViewResourceId, List<MenuListItem> menuListItems) {
+            super(context, textViewResourceId, menuListItems);
+            this.menuListItems = menuListItems;
+            this.context = context;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, final View convertView, ViewGroup parent) {
+            View listItemView = convertView;
+
+            MenuListItem menuListItem = getItem(position);
+
+            int color = menuListItem.colorRes;
+            int image = menuListItem.imageRes;
+            String labelString = menuListItem.labelText;
+
+            if (listItemView == null) {
+                LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+                listItemView = layoutInflater.inflate(R.layout.list_item, null);
+            }
+            TextView textView = (TextView) listItemView.findViewById(R.id.textView);
+            ImageView imageView = (ImageView) listItemView.findViewById(R.id.imageView);
+            imageView.setImageResource(image);
+            listItemView.setBackgroundResource(color);
+            textView.setText(labelString);
+
+            pushLeft(listItemView, position);
+
+            switch (position) {
+                case 0: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, GameActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    break;
+                }
+                case 1: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, GameActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    break;
+                }
+                case 2: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, GameActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    break;
+                }
+                case 3: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, HelpActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    break;
+                }
+                case 4: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(context, CreditsActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    break;
+                }
+                case 5: {
+                    listItemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finish();
+                        }
+                    });
+                    break;
+                }
+            }
+
+            return listItemView;
+        }
+
+        public void pushLeft(View v, int pos) {
+            // create set of animationsű
+
+            AnimationSet pushAnimation = new AnimationSet(false);
+
+            pushAnimation.setFillAfter(true);
+
+            float width = getContext().getResources().getDisplayMetrics().widthPixels;
+            float row_hight = v.getHeight();
+
+            // create translation animation
+            TranslateAnimation trans = new TranslateAnimation(width, row_hight * pos,
+                    0, row_hight * pos);
+            trans.setStartOffset(pos * 50);
+            trans.setDuration(1000);
+            pushAnimation.addAnimation(trans);
+
+            // start our animation
+            v.startAnimation(pushAnimation);
+        }
+
     }
 }

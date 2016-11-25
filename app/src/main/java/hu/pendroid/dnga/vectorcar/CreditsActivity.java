@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Created by robotka1055 on 2016. 11. 24..
- */
-
 public class CreditsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,5 +19,11 @@ public class CreditsActivity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 }
