@@ -212,18 +212,18 @@ public final class MenuActivity extends Activity {
         }
 
         public void pushLeft(View v, int pos) {
-            // create set of animationsű
+            // create set of animations
 
             AnimationSet pushAnimation = new AnimationSet(false);
 
             pushAnimation.setFillAfter(true);
 
             float width = getContext().getResources().getDisplayMetrics().widthPixels;
-            float row_hight = v.getHeight();
+            float row_height = v.getHeight();
 
             // create translation animation
-            TranslateAnimation trans = new TranslateAnimation(width, row_hight * pos,
-                    0, row_hight * pos);
+            TranslateAnimation trans = new TranslateAnimation(width, row_height * pos,
+                    0, row_height * pos);
             trans.setStartOffset(pos * 50);
             trans.setDuration(1000);
             pushAnimation.addAnimation(trans);

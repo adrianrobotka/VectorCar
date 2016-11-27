@@ -2,7 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGameBackground"
     android:orientation="vertical"
     tools:context=".GameActivity">
 
@@ -94,6 +93,7 @@
     <hu.pendroid.dnga.vectorcar.view.GameDrawer
         android:id="@+id/gameDrawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/colorGameBackground" />
 
 </LinearLayout>

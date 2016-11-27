@@ -19,7 +19,7 @@ public final class GroundMotionModifier extends Modifier {
 
     @Override
     public void doRound() {
-        Vector newMotion = ground.motion.minus(ground.motion.divide(15 * Config.FPS));
+        Vector newMotion = ground.motion.subtract(ground.motion.divide(15 * Config.FPS));
         if (newMotion.getY() >= 0)
             ground.motion = newMotion;
         else

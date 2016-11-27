@@ -5,7 +5,7 @@ package hu.pendroid.dnga.vectorcar;
  */
 public final class Config {
     /**
-     * the height ofthe info panel  in the game (in px)
+     * the height of the info panel  in the game (in px)
      */
     public static final float INFO_PANEL_HEIGHT = 60;
     /**
@@ -25,7 +25,7 @@ public final class Config {
      */
     public static final int LANES = 3;
     /**
-     * Min lenght of a control gesture
+     * Min length of a control gesture
      */
     public static final float MIN_GESTURE_LENGTH = WIDTH / 5;
     /**
@@ -33,7 +33,7 @@ public final class Config {
      */
     public static final float MAX_SPEED = 30;
     /**
-     * Smallest spped unit (unit of the negative acceleration)
+     * Smallest speed unit (unit of the negative acceleration)
      */
     public static final float SMALLEST_SPEED = 0.5f;
 

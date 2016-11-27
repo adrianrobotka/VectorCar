@@ -7,17 +7,17 @@ public class Vector {
     /**
      * The width
      */
-    protected float x;
+    private float x;
 
     /**
      * The height
      */
-    protected float y;
+    private float y;
 
     /**
      * The depth
      */
-    protected float z;
+    private float z;
 
     /**
      * Null vector
@@ -64,12 +64,12 @@ public class Vector {
     }
 
     /**
-     * Substract vector
+     * Subtract vector
      *
-     * @param vector The substrahend vector
+     * @param vector The subtrahend vector
      * @return The result
      */
-    public Vector minus(Vector vector) {
+    public Vector subtract(Vector vector) {
         return new Vector(x - vector.x, y - vector.y, z - vector.z);
     }
 

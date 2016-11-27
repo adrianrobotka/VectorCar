@@ -81,7 +81,7 @@ public final class Car extends LaneBasedModel {
     public void brake(int multiplier) {
         Log.i(LOGTAG, "Brake car: " + multiplier + "x");
 
-        Vector newMotion = ground.motion.minus(new Vector(0, multiplier * Config.SMALLEST_SPEED));
+        Vector newMotion = ground.motion.subtract(new Vector(0, multiplier * Config.SMALLEST_SPEED));
         if (newMotion.getY() > 0)
             ground.motion = newMotion;
         else
