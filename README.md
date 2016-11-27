@@ -4,5 +4,5 @@ Simple car game for android
 # Credits
 - Adrián Robotka
 - László Radnai
-- Marcell Bidlek
-- Marcell Gyulai
+- Márton Bidlek
+- Márton Gyulai
