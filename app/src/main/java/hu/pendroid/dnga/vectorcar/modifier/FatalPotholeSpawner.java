@@ -24,7 +24,7 @@ public class FatalPotholeSpawner extends Modifier {
         this.fatalPotholes = fatalPotholes;
         this.ground = ground;
         this.car = car;
-        spawnBlock = new int[fatalPotholes.size()];
+        spawnBlock = new int[Config.LANES];
     }
 
     @Override

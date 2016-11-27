@@ -23,19 +23,21 @@ public final class FatalPotHoleCollisionDetector extends Modifier {
     }
 
     private boolean checkCollision(FatalPothole fatalPothole) {
-        if (!fatalPothole.isOnTheRoad())
+        boolean onTheRoad = fatalPothole.isOnTheRoad();
+        if (!onTheRoad)
             return false;
 
-        if (car.getLane() != fatalPothole.getLane())
-            return false;
-
-        if (car.position.getY() + car.metrics.getY() < fatalPothole.position.getY())
+        boolean inTheLane = car.getLane() == fatalPothole.getLane();
+        if (!inTheLane)
             return false;
 
         float potholeScreenY = ground.position.getY() - fatalPothole.position.getY();
-        potholeScreenY += fatalPothole.metrics.getY();
 
-        return car.position.getY() < potholeScreenY;
+        boolean topPunch = potholeScreenY < car.position.getY() && potholeScreenY + fatalPothole.metrics.getY() > car.position.getY();
+
+        boolean bottomPunch = potholeScreenY < car.position.getY() + car.metrics.getY() && potholeScreenY + fatalPothole.metrics.getY() > car.position.getY() + car.metrics.getY();
+
+        return topPunch || bottomPunch;
     }
 
     @Override
