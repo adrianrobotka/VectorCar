@@ -41,4 +41,9 @@ public final class Config {
      * Min speed to control the car
      */
     public static final float MIN_CONTROL_SPEED = 0.5f;
+
+    /**
+     * Time interval of a puncture
+     */
+    public static final float punctureTime = FPS * 10;
 }

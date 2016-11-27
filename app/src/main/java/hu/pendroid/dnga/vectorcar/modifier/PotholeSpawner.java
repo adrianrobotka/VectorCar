@@ -9,19 +9,19 @@ import java.util.Random;
 
 import hu.pendroid.dnga.vectorcar.Config;
 import hu.pendroid.dnga.vectorcar.model.Car;
-import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.model.Pothole;
 
-public class FatalPotholeSpawner extends Modifier {
+public class PotholeSpawner extends Modifier {
     private static Random random = new Random();
     private Car car;
     private Ground ground;
-    private List<FatalPothole> fatalPotholes = new ArrayList<>();
+    private ArrayList<Pothole> potholes = new ArrayList<>();
     private int time = 0;
     private int[] spawnBlock;
 
-    public FatalPotholeSpawner(List<FatalPothole> fatalPotholes, Ground ground, Car car) {
-        this.fatalPotholes = fatalPotholes;
+    public PotholeSpawner(ArrayList<Pothole> potholes, Ground ground, Car car) {
+        this.potholes = potholes;
         this.ground = ground;
         this.car = car;
         spawnBlock = new int[Config.LANES];
@@ -29,7 +29,7 @@ public class FatalPotholeSpawner extends Modifier {
 
     @Override
     public void doRound() throws GameException {
-        List<FatalPothole> freeFatalPotholes = getFreePotholes();
+        List<Pothole> freePotholes = getFreePotholes();
 
         decreaseBlocks();
 
@@ -54,9 +54,12 @@ public class FatalPotholeSpawner extends Modifier {
 
             int lane = car.getLane();
 
-            if (spawnBlock[lane] == 0 && freeFatalPotholes.size() > 0) {
+            if (spawnBlock[lane] == 0 && freePotholes.size() > 0) {
                 spawnBlock[lane] = (int) (Config.FPS * laneSpawnSleep);
-                freeFatalPotholes.get(0).spawn(lane);
+                if (random.nextBoolean())
+                    freePotholes.get(0).spawn(lane, Pothole.PotholeType.FATAL);
+                else
+                    freePotholes.get(0).spawn(lane, Pothole.PotholeType.LIGHT);
             }
         }
 
@@ -74,13 +77,13 @@ public class FatalPotholeSpawner extends Modifier {
         }
     }
 
-    public List<FatalPothole> getFreePotholes() {
-        List<FatalPothole> freeFatalPotholes = new ArrayList<>();
-        for (FatalPothole fatalPothole : fatalPotholes) {
-            if (!fatalPothole.isOnTheRoad()) {
-                freeFatalPotholes.add(fatalPothole);
+    public List<Pothole> getFreePotholes() {
+        List<Pothole> freePotholes = new ArrayList<>();
+        for (Pothole pothole : potholes) {
+            if (!pothole.isOnTheRoad()) {
+                freePotholes.add(pothole);
             }
         }
-        return freeFatalPotholes;
+        return freePotholes;
     }
 }

@@ -1,28 +1,28 @@
 package hu.pendroid.dnga.vectorcar.modifier;
 
 import com.adrianrobotka.brick.Modifier;
+import com.adrianrobotka.brick.util.GameException;
 import com.adrianrobotka.brick.util.GameOverException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import hu.pendroid.dnga.vectorcar.model.Car;
-import hu.pendroid.dnga.vectorcar.model.FatalPothole;
 import hu.pendroid.dnga.vectorcar.model.Ground;
+import hu.pendroid.dnga.vectorcar.model.Pothole;
 
-public final class FatalPotHoleCollisionDetector extends Modifier {
+public class PotholeCollisionDetector extends Modifier {
     private Car car;
     private Ground ground;
-    private List<FatalPothole> fatalPotholes = new ArrayList<>();
+    private ArrayList<Pothole> potholes = new ArrayList<>();
 
 
-    public FatalPotHoleCollisionDetector(List<FatalPothole> fatalPotholes, Ground ground, Car car) {
-        this.fatalPotholes = fatalPotholes;
+    public PotholeCollisionDetector(ArrayList<Pothole> potholes, Ground ground, Car car) {
+        this.potholes = potholes;
         this.ground = ground;
         this.car = car;
     }
 
-    private boolean checkCollision(FatalPothole fatalPothole) {
+    private boolean checkCollision(Pothole fatalPothole) {
         boolean onTheRoad = fatalPothole.isOnTheRoad();
         if (!onTheRoad)
             return false;
@@ -41,10 +41,16 @@ public final class FatalPotHoleCollisionDetector extends Modifier {
     }
 
     @Override
-    public void doRound() throws GameOverException {
-        for (FatalPothole fatalPothole : fatalPotholes) {
-            if (checkCollision(fatalPothole)) {
-                throw new GameOverException();
+    public void doRound() throws GameException {
+        for (Pothole pothole : potholes) {
+            if (checkCollision(pothole)) {
+                if (pothole.getType() == Pothole.PotholeType.FATAL)
+                    throw new GameOverException();
+
+                if (pothole.getType() == Pothole.PotholeType.LIGHT) {
+                    ground.doPuncture();
+                    pothole.clear();
+                }
             }
         }
     }

@@ -16,6 +16,8 @@ public final class Ground extends Model {
     // Width of a zone
     private static float zoneWidth;
 
+    private int punctureTime = 0;
+
     public Ground() {
         // start position of the first lanes
         position = new Vector();
@@ -39,5 +41,18 @@ public final class Ground extends Model {
         x += lane * laneWidth;
         // Padding is missing from the X value (post correction needed!)
         return new Vector(x, 0);
+    }
+
+    public boolean isPunctured() {
+        return punctureTime > 0;
+    }
+
+    public void discountPuncture() {
+        if (punctureTime > 0)
+            punctureTime--;
+    }
+
+    public void doPuncture() {
+        punctureTime += Config.punctureTime;
     }
 }

@@ -53,6 +53,11 @@ public final class GameActivity extends Activity implements
         int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
+
+        if (ground.isPunctured())
+            punctureText.setVisibility(View.VISIBLE);
+        else
+            punctureText.setVisibility(View.GONE);
     }
 
     private void setCallbacks() {

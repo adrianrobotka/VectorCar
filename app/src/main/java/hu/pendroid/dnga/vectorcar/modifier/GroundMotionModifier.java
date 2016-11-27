@@ -19,7 +19,13 @@ public final class GroundMotionModifier extends Modifier {
 
     @Override
     public void doRound() {
+        // 15 is a magic constant
         Vector newMotion = ground.motion.subtract(ground.motion.divide(15 * Config.FPS));
+
+        if (ground.isPunctured()) {
+            newMotion = newMotion.divide(2);
+        }
+
         if (newMotion.getY() >= 0)
             ground.motion = newMotion;
         else
