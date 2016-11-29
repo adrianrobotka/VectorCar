@@ -23,7 +23,7 @@ public final class Config {
     /**
      * Number of lanes
      */
-    public static final int LANES = 3;
+    public static int LANES = 3;
     /**
      * Min length of a control gesture
      */
@@ -31,7 +31,7 @@ public final class Config {
     /**
      * Max speed of the car
      */
-    public static final float MAX_SPEED = 30;
+    public static float MAX_SPEED = 30;
     /**
      * Smallest speed unit (unit of the negative acceleration)
      */
@@ -45,5 +45,5 @@ public final class Config {
     /**
      * Time interval of a puncture
      */
-    public static final float punctureTime = FPS * 10;
+    public static float punctureTime = FPS * 10;
 }
