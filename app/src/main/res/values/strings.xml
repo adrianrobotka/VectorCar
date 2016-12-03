@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">VectorCar</string>
-    <string name="new_game_button">New game</string>
     <string name="game_over">GameOver</string>
     <string name="puncture">PUNCTURE</string>
     <string name="menu_item1">New Game</string>
@@ -10,10 +9,13 @@
     <string name="menu_item5">Credits</string>
     <string name="menu_item6">Exit</string>
     <string name="back_button">Back</string>
-    <string name="max_speed">Maximum speed: </string>
-    <string name="lane_number">Number of lanes: </string>
+    <string name="max_speed">"Maximum speed: "</string>
+    <string name="lane_number">"Number of lanes: "</string>
     <string name="car">Car</string>
     <string name="map">Map</string>
     <string name="credits_text">This game was developed for the contest of University of Pannon by Don\'t never give app team</string>
     <string name="help_text">Swipe right or left to switch between lanes, up to accelerate, down to brake!</string>
+    <string name="shared_preferences_key">hu.pendroid.dnga.vectorcar.key</string>
+    <string name="maximum_speed_key">maximum_speed</string>
+    <string name="lane_number_key">lane_number</string>
 </resources>

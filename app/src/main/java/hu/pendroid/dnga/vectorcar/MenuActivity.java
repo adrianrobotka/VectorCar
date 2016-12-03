@@ -41,6 +41,8 @@ public final class MenuActivity extends Activity {
 
         initMenu();
 
+        initOptionValues();
+
         controller.setFps(Config.FPS);
     }
 
@@ -53,6 +55,13 @@ public final class MenuActivity extends Activity {
         menuAdapter = new MenuAdapter(this, R.layout.list_item, menuListItems);
 
         listView.setAdapter(menuAdapter);
+    }
+
+    private void initOptionValues(){
+        OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(MenuActivity.this); //Create a DataSync object
+
+        Config.LANES = Integer.valueOf( dataSync.getValue(getString(R.string.lane_number_key), String.valueOf(Config.LANES)) ); //Set the lane number
+        Config.MAX_SPEED = Float.valueOf( dataSync.getValue(getString(R.string.maximum_speed_key), String.valueOf(Config.MAX_SPEED)) ); //Set the max speed
     }
 
     @Override
@@ -143,7 +152,7 @@ public final class MenuActivity extends Activity {
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            // new game
+                            // start game
                             controller.init();
                             Intent intent = new Intent(context, GameActivity.class);
                             context.startActivity(intent);
@@ -152,7 +161,7 @@ public final class MenuActivity extends Activity {
                     break;
                 }
                 case 1: {
-                    // load game
+                    // leaderboard
                     listItemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
