@@ -46,4 +46,14 @@ public final class Config {
      * Time interval of a puncture
      */
     public static float punctureTime = FPS * 10;
+
+    /**
+     * The number of punctures
+     */
+    public static int punctureCounter = 0;
+
+    /**
+     *  Score reduction at puncture
+     */
+    public static final int scoreReductionPuncture = -100;
 }

@@ -29,6 +29,8 @@ public final class GameActivity extends Activity implements
     private GameDrawer drawer;
     private TextView velocityInfoText;
     private TextView roadInfoText;
+    private TextView scoreInfoText;
+    private TextView scoreInfoTextTitle;
     private TextView punctureText;
     private AppController controller = AppController.getInstance();
     private GestureDetectorCompat detector;
@@ -90,18 +92,26 @@ public final class GameActivity extends Activity implements
         int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
+        scoreInfoText.setText((road + (Config.punctureCounter * Config.scoreReductionPuncture))+"");
         currentUserScore = road;
 
-        if (ground.isPunctured())
+        if (ground.isPunctured()) {
             punctureText.setVisibility(View.VISIBLE);
-        else
+            scoreInfoText.setVisibility(View.GONE);
+            scoreInfoTextTitle.setVisibility(View.GONE);
+        } else {
             punctureText.setVisibility(View.GONE);
+            scoreInfoText.setVisibility(View.VISIBLE);
+            scoreInfoTextTitle.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setCallbacks() {
         drawer = (GameDrawer) findViewById(R.id.gameDrawer);
         velocityInfoText = (TextView) findViewById(R.id.velocityInfoText);
         roadInfoText = (TextView) findViewById(R.id.roadInfoText);
+        scoreInfoText = (TextView) findViewById(R.id.scoreInfoText);
+        scoreInfoTextTitle = (TextView) findViewById(R.id.scoreInfoTextTitle);
         punctureText = (TextView) findViewById(R.id.punctureText);
 
         controller.setDrawerCallback(new Runnable() {
@@ -127,17 +137,32 @@ public final class GameActivity extends Activity implements
                         setContentView(R.layout.gameover);
                         TextView tv = (TextView) findViewById(R.id.gameoverLabel);
                         tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Wanted.ttf"));
+                        TextView gameOverScoreText = (TextView) findViewById(R.id.gameoverScoreText);
+                        findViewById(R.id.gameOverLayout).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                finish();
+                            }
+                        });
 
-                        if(currentUserName != null) { //Store score value to sharedPreferences
-                            OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
-                            String values = "";
+                        //Save score value to sharedPreferences
+                        OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
 
-                            values = dataSync.getValue(getString(R.string.score_list_key), values);
+                        String values = ""; //Saved string, contains key-value pairs separated with %% and ->
+                        values = dataSync.getValue(getString(R.string.score_list_key), values); //Get the existing scores
+                        Log.d("VC", "  "+ (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)));
 
-                            values += currentUserScore + "-" + (currentUserName.contains(";") ? currentUserName.replaceAll(";","") : currentUserName) + ";";
+                        //Print the score on the gameover layout
+                        gameOverScoreText.setText((currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture))+"");
 
-                            dataSync.setValue(getString(R.string.score_list_key), values);
-                        }
+                        //Put the new score to the end
+                        values += (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)) + "->" + (currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName) + "%%";
+
+                        //Save it to the sharedPreferences
+                        dataSync.setValue(getString(R.string.score_list_key), values);
+
+                        //Reset punctureCounter
+                        Config.punctureCounter = 0;
                     }
                 });
             }

@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gameOverLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="4"
     android:background="@color/colorMenuBackground"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/gameoverLabel"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="center"
         android:text="@string/game_over"
         android:textColor="@color/colorGameOverText"
         android:textSize="32sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_weight="1"
+            android:text="@string/your_score"
+            android:textColor="@color/colorGameOverText"
+            android:textSize="26sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gameoverScoreText"
+            android:gravity="left"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:text="123"
+            android:textColor="@color/colorGameOverText"
+            android:textSize="26sp" />
+    </LinearLayout>
+
 </LinearLayout>

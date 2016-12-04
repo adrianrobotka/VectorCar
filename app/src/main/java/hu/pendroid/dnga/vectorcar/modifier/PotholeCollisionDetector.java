@@ -6,6 +6,7 @@ import com.adrianrobotka.brick.util.GameOverException;
 
 import java.util.ArrayList;
 
+import hu.pendroid.dnga.vectorcar.Config;
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.model.Pothole;
@@ -49,6 +50,7 @@ public class PotholeCollisionDetector extends Modifier {
 
                 if (pothole.getType() == Pothole.PotholeType.LIGHT) {
                     ground.doPuncture();
+                    Config.punctureCounter++;
                     pothole.clear();
                 }
             }

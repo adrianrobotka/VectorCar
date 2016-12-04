@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,38 +47,38 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 
     private void initListView(){
-        List<ScoreMenuListItem> scoreMenuListItems = getScores();
+        List<ScoreMenuListItem> scoreMenuListItems = getScores(); //Make a list from the scores
 
         scoreMenuAdapter = new ScoreMenuAdapter(this, R.layout.score_list_item, scoreMenuListItems);
-
         listView.setAdapter(scoreMenuAdapter);
     }
 
     private List<ScoreMenuListItem> getScores(){
         List<ScoreMenuListItem> returnScores = new ArrayList<>();
 
-        String valuesString = dataSync.getValue(getString(R.string.score_list_key), "");
-        Log.d("VC", "Scores: " + valuesString.length());
+        String valuesString = dataSync.getValue(getString(R.string.score_list_key), ""); //Get the saved score data
 
-        if(valuesString.length() != 0) {
-            String values[] = valuesString.split(";");
+        if(valuesString.length() != 0) { //Make sure that there are scores
+
+            String values[] = valuesString.split("%%"); //The key-value pairs are separated with %%
+
             int score[] = new int[values.length];
             String name[] = new String[values.length];
 
             for(int i = 0; i < values.length; i++) {
-                String scorename[] = values[i].split("-");
-                score[i] = Integer.valueOf(scorename[0]);
-                name[i] = scorename[1];
+                String scorename[] = values[i].split("->"); // The key and value are separated with ->
+                score[i] = Integer.valueOf(scorename[0]); //Put the key to the score[i]
+                name[i] = scorename[1]; //Put the value to the name[i]
             }
 
-            QuickSort quicksort = new QuickSort();
+            QuickSort quicksort = new QuickSort(); //Sort the score and name array
             quicksort.sort(score, name);
 
-            for(int i = values.length-1; i > -1; i--){
-            returnScores.add(new ScoreMenuListItem((values.length-i)+".", name[i], String.valueOf(score[i]), values.length-i == 1 ? R.drawable.first : values.length-i == 2 ? R.drawable.second :  values.length-i == 3 ? R.drawable.third : 0, Color.GRAY));
+            for(int i = values.length-1; i > -1; i--){ //Put the score and name array's values in the return list
+                returnScores.add(new ScoreMenuListItem((values.length-i)+".", name[i], String.valueOf(score[i]), values.length-i == 1 ? R.drawable.first : values.length-i == 2 ? R.drawable.second :  values.length-i == 3 ? R.drawable.third : 0, Color.GRAY));
             }
         }
-        else {
+        else { //In case there is no score
             Toast.makeText(this, getText(R.string.no_scores), Toast.LENGTH_LONG).show();
         }
 
@@ -113,10 +112,12 @@ public class LeaderboardActivity extends AppCompatActivity {
                 LayoutInflater layoutInflater = LayoutInflater.from(getContext());
                 scoreListItemView = layoutInflater.inflate(R.layout.score_list_item, null);
             }
+
             TextView posTextView = (TextView) scoreListItemView.findViewById(R.id.posTextView);
             TextView nameTextView = (TextView) scoreListItemView.findViewById(R.id.nameTextView);
             TextView scoreTextView = (TextView) scoreListItemView.findViewById(R.id.scoreTextView);
             ImageView imageView = (ImageView) scoreListItemView.findViewById(R.id.scoreImageView);
+
             if(scoreMenuListItem.mode == ScoreMenuListItem.DOBOGOS) {
                 imageView.setVisibility(View.VISIBLE);
                 imageView.setImageResource(image);

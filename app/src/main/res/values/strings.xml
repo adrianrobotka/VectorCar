@@ -14,6 +14,8 @@
     <string name="car">Car</string>
     <string name="map">Map</string>
     <string name="reset">Reset</string>
+    <string name="your_score">"Your Score: "</string>
+
     <string name="credits_text">This game was developed for the contest of University of Pannon by Don\'t never give app team</string>
     <string name="help_text">Swipe right or left to switch between lanes, up to accelerate, down to brake!</string>
     <string name="no_scores">No scores have been made so far...</string>
