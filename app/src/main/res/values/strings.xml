@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">VectorCar</string>
-    <string name="game_over">GameOver</string>
+    <string name="game_over">Game Over</string>
     <string name="puncture">PUNCTURE</string>
     <string name="menu_item1">Start Game</string>
     <string name="menu_item2">Leaderboard</string>
@@ -21,5 +21,5 @@
     <string name="shared_preferences_key">hu.pendroid.dnga.vectorcar.key</string>
     <string name="maximum_speed_key">maximum_speed</string>
     <string name="lane_number_key">lane_number</string>
-    <string name="score_list_key">score_list</string>
+    <string name="score_list_key">score_list_key</string>
 </resources>

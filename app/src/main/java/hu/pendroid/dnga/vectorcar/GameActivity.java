@@ -15,9 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
 import hu.pendroid.dnga.vectorcar.view.GameDrawer;
@@ -133,16 +130,13 @@ public final class GameActivity extends Activity implements
 
                         if(currentUserName != null) { //Store score value to sharedPreferences
                             OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
-                            Set<String> stringSet = new HashSet<String>() {{
-                                add("");
-                            }};
-                            stringSet.clear();
+                            String values = "";
 
-                            stringSet = dataSync.getStringSet(getString(R.string.score_list_key), stringSet);
+                            values = dataSync.getValue(getString(R.string.score_list_key), values);
 
-                            stringSet.add(currentUserScore + "-" + currentUserName);
+                            values += currentUserScore + "-" + (currentUserName.contains(";") ? currentUserName.replaceAll(";","") : currentUserName) + ";";
 
-                            dataSync.setStringSet(getString(R.string.score_list_key), stringSet);
+                            dataSync.setValue(getString(R.string.score_list_key), values);
                         }
                     }
                 });

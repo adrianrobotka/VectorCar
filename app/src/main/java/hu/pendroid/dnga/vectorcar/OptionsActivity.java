@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.Set;
-
 public class OptionsActivity extends AppCompatActivity {
 
     TextView maxSpeedText, laneNumberText;
@@ -81,8 +79,7 @@ public class OptionsActivity extends AppCompatActivity {
         finish();
     }
 
-    private void initValues()
-    {
+    private void initValues() {
         maxSpeedText.setText(getResources().getText(R.string.max_speed).toString() + (Config.MAX_SPEED));
         laneNumberText.setText(getResources().getText(R.string.lane_number).toString() + (Config.LANES));
 
@@ -91,49 +88,22 @@ public class OptionsActivity extends AppCompatActivity {
 
     }
 
-    public static class DataSync
-    {
+    public static class DataSync {
         Context context;
         SharedPreferences sharedPreferences;
 
-        public DataSync(Context context)
-        {
+        public DataSync(Context context) {
             this.context = context;
             sharedPreferences = context.getSharedPreferences(context.getString(R.string.shared_preferences_key),Context.MODE_PRIVATE);
         }
-        public String getValue(String key, String defaultValue)
-        {
-            String value = sharedPreferences.getString(key, defaultValue);
-            return value;
+        public String getValue(String key, String defaultValue) {
+            return sharedPreferences.getString(key, defaultValue);
         }
-        public boolean setValue(String key, String value)
-        {
-            try {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString(key, value);
-                editor.apply();
-                return true;
-            }catch(Exception e) {
-                return false;
-            }
 
-        }
-        public boolean setStringSet(String key, Set<String> value)
-        {
-            try {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putStringSet(key, value);
-                editor.apply();
-                return true;
-            }catch(Exception e) {
-                return false;
-            }
-
-        }
-        public Set<String> getStringSet(String key, Set<String> defaultValue)
-        {
-            Set<String> value = sharedPreferences.getStringSet(key, defaultValue);
-            return value;
+        public void setValue(String key, String value) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString(key, value);
+            editor.apply();
         }
     }
 }

@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LeaderboardActivity extends AppCompatActivity {
     ListView listView;
@@ -37,45 +36,47 @@ public class LeaderboardActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listViewLeaderboard);
         Button resetButton = (Button) findViewById(R.id.buttonReset);
 
+        initListView();
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataSync.setValue(getString(R.string.score_list_key), null);
+                initListView();
+            }
+        });
+    }
+
+    private void initListView(){
         List<ScoreMenuListItem> scoreMenuListItems = getScores();
 
         scoreMenuAdapter = new ScoreMenuAdapter(this, R.layout.score_list_item, scoreMenuListItems);
 
         listView.setAdapter(scoreMenuAdapter);
-
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dataSync.setStringSet(getString(R.string.score_list_key), null);
-                scoreMenuAdapter.notifyDataSetChanged();
-            }
-        });
-
     }
 
     private List<ScoreMenuListItem> getScores(){
         List<ScoreMenuListItem> returnScores = new ArrayList<>();
 
-        Set<String> inStringDatas = dataSync.getStringSet(getString(R.string.score_list_key), null);
+        String valuesString = dataSync.getValue(getString(R.string.score_list_key), "");
+        Log.d("VC", "Scores: " + valuesString.length());
 
-        if(inStringDatas != null) {
-            List<String> stringList = new ArrayList<String>(inStringDatas);
-            Log.d("VC", "Scores: " + stringList.size());
+        if(valuesString.length() != 0) {
+            String values[] = valuesString.split(";");
+            int score[] = new int[values.length];
+            String name[] = new String[values.length];
 
-            int score[] = new int[stringList.size()];
-            String name[] = new String[stringList.size()];
-
-            for(int i = 0; i < stringList.size(); i++) {
-                String scorename[] = stringList.get(i).split("-");
+            for(int i = 0; i < values.length; i++) {
+                String scorename[] = values[i].split("-");
                 score[i] = Integer.valueOf(scorename[0]);
                 name[i] = scorename[1];
             }
 
-            Quicksort quicksort = new Quicksort();
+            QuickSort quicksort = new QuickSort();
             quicksort.sort(score, name);
 
-            for(int i = stringList.size()-1; i > -1; i--){
-            returnScores.add(new ScoreMenuListItem((stringList.size()-i)+".", name[i], String.valueOf(score[i]), stringList.size()-i == 1 ? R.drawable.first : stringList.size()-i == 2 ? R.drawable.second :  stringList.size()-i == 3 ? R.drawable.third : 0, Color.GRAY));
+            for(int i = values.length-1; i > -1; i--){
+            returnScores.add(new ScoreMenuListItem((values.length-i)+".", name[i], String.valueOf(score[i]), values.length-i == 1 ? R.drawable.first : values.length-i == 2 ? R.drawable.second :  values.length-i == 3 ? R.drawable.third : 0, Color.GRAY));
             }
         }
         else {
@@ -186,7 +187,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         }
     }
 
-    public class Quicksort  {
+    public class QuickSort {
         private int[] numbers;
         private int number;
         private String strArray[];

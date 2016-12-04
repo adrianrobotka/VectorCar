@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class MenuActivity extends Activity {
-    public static final int imageResources[] = {R.drawable.play_icon, R.drawable.continue_icon, R.drawable.options_icon, R.drawable.help_icon, R.drawable.credits_icon, R.drawable.exit_icon};
+    public static final int imageResources[] = {R.drawable.play_icon, R.drawable.leaderboard, R.drawable.options_icon, R.drawable.help_icon, R.drawable.credits_icon, R.drawable.exit_icon};
     public static final int colorResources[] = {R.color.menuColor1, R.color.menuColor2, R.color.menuColor3, R.color.menuColor4, R.color.menuColor5, R.color.menuColor6};
     public static final int labelResources[] = {R.string.menu_item1, R.string.menu_item2, R.string.menu_item3, R.string.menu_item4, R.string.menu_item5, R.string.menu_item6};
     private AppController controller = AppController.getInstance();
