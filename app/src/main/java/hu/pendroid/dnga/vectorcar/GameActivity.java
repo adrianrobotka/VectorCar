@@ -1,6 +1,8 @@
 package hu.pendroid.dnga.vectorcar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,7 +12,11 @@ import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import hu.pendroid.dnga.vectorcar.model.Car;
 import hu.pendroid.dnga.vectorcar.model.Ground;
@@ -32,9 +38,14 @@ public final class GameActivity extends Activity implements
 
     private Car car;
 
+    private String currentUserName;
+    private int currentUserScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        askName();
 
         hideNavigationBar();
 
@@ -46,6 +57,35 @@ public final class GameActivity extends Activity implements
         detector = new GestureDetectorCompat(this, this);
     }
 
+    private void askName(){
+        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle(getText(R.string.choose_name_title));
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+
+        alert.setView(input);
+
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                currentUserName = input.getText().toString();
+                dialog.dismiss();
+                hideNavigationBar();
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                dialog.dismiss();
+                hideNavigationBar();
+            }
+        });
+
+        alert.show();
+    }
+
     private void refreshInfoPanel() {
         Ground ground = (Ground) getModels(Ground.class).get(0);
         final int multiplier = 3;
@@ -53,6 +93,7 @@ public final class GameActivity extends Activity implements
         int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
+        currentUserScore = road;
 
         if (ground.isPunctured())
             punctureText.setVisibility(View.VISIBLE);
@@ -89,6 +130,20 @@ public final class GameActivity extends Activity implements
                         setContentView(R.layout.gameover);
                         TextView tv = (TextView) findViewById(R.id.gameoverLabel);
                         tv.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Wanted.ttf"));
+
+                        if(currentUserName != null) { //Store score value to sharedPreferences
+                            OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
+                            Set<String> stringSet = new HashSet<String>() {{
+                                add("");
+                            }};
+                            stringSet.clear();
+
+                            stringSet = dataSync.getStringSet(getString(R.string.score_list_key), stringSet);
+
+                            stringSet.add(currentUserScore + "-" + currentUserName);
+
+                            dataSync.setStringSet(getString(R.string.score_list_key), stringSet);
+                        }
                     }
                 });
             }

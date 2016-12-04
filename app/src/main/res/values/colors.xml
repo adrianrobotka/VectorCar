@@ -5,6 +5,7 @@
     <color name="colorAccent">#ffffff</color>
     <color name="colorGameBackground">#838383</color>
     <color name="colorMenuBackground">#838383</color>
+    <color name="colorLeaderBoardBackground">#838383</color>
     <color name="colorGameSeparatingLane">#ffffff</color>
     <color name="colorGameSolidLane">#ff5e63</color>
     <color name="colorGameOverText">#ffffff</color>

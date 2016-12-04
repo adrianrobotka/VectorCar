@@ -166,7 +166,7 @@ public final class MenuActivity extends Activity {
                         @Override
                         public void onClick(View view) {
                             controller.init();
-                            Intent intent = new Intent(context, GameActivity.class);
+                            Intent intent = new Intent(context, LeaderboardActivity.class);
                             context.startActivity(intent);
                         }
                     });

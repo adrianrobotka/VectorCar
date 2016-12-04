@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import java.util.Set;
+
 public class OptionsActivity extends AppCompatActivity {
 
     TextView maxSpeedText, laneNumberText;
@@ -115,6 +117,23 @@ public class OptionsActivity extends AppCompatActivity {
                 return false;
             }
 
+        }
+        public boolean setStringSet(String key, Set<String> value)
+        {
+            try {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putStringSet(key, value);
+                editor.apply();
+                return true;
+            }catch(Exception e) {
+                return false;
+            }
+
+        }
+        public Set<String> getStringSet(String key, Set<String> defaultValue)
+        {
+            Set<String> value = sharedPreferences.getStringSet(key, defaultValue);
+            return value;
         }
     }
 }
