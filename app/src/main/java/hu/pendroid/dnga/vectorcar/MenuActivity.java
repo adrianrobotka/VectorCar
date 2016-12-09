@@ -19,6 +19,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Feature-ök a FEATURES.md fájlban
+ */
+
 public final class MenuActivity extends Activity {
     public static final int imageResources[] = {R.drawable.play_icon, R.drawable.leaderboard, R.drawable.options_icon, R.drawable.help_icon, R.drawable.credits_icon, R.drawable.exit_icon};
     public static final int colorResources[] = {R.color.menuColor1, R.color.menuColor2, R.color.menuColor3, R.color.menuColor4, R.color.menuColor5, R.color.menuColor6};
