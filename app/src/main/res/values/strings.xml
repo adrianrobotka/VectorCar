@@ -16,8 +16,9 @@
     <string name="reset">Reset</string>
     <string name="your_score">"Your Score: "</string>
 
-    <string name="credits_text">This game was developed for the contest of University of Pannon by Don\'t never give app team</string>
-    <string name="help_text">Swipe right or left to switch between lanes, up to accelerate, down to brake!</string>
+    <string name="credits_text">This game was developed for the contest of University of Pannon by Don\'t never give app team.</string>
+    <string name="created_text">Created by the Don\'t never give app team.</string>
+    <string name="help_text">">>  Swipe right or left to switch between lanes\n\n>>  Up to accelerate\n\n>>  Down to brake"</string>
     <string name="no_scores">No scores have been made so far...</string>
     <string name="choose_name_title">Type your name!</string>
     <string name="shared_preferences_key">hu.pendroid.dnga.vectorcar.key</string>

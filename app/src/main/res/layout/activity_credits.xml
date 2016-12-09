@@ -9,20 +9,29 @@
         android:id="@+id/backButtonCredits"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:layout_gravity="top|end"
+        android:layout_gravity="top|left"
         android:background="@color/menuColor5"
         android:text="@string/back_button"
         android:textAlignment="center"
         android:textColor="@color/colorButtonText" />
 
     <TextView
-        android:id="@+id/textViewCredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="top"
+        android:layout_marginTop="60dp"
+        android:paddingLeft="10dp"
         android:text="@string/credits_text"
-        android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="30sp" />
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="10dp"
+        android:text="@string/created_text"
+        android:textColor="@android:color/white"
+        android:textSize="12sp" />
 
 </FrameLayout>
