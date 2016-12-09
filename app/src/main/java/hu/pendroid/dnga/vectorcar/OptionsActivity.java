@@ -32,10 +32,9 @@ public class OptionsActivity extends AppCompatActivity {
 
         maxSpeed.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-            {
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 maxSpeedText.setText(getResources().getText(R.string.max_speed).toString() + (i + 5));
-                Config.MAX_SPEED = (float)(i + 5);
+                Config.MAX_SPEED = (float) (i + 5);
 
                 dataSync.setValue(getString(R.string.maximum_speed_key), String.valueOf(i + 5)); //Store that value
             }
@@ -53,12 +52,11 @@ public class OptionsActivity extends AppCompatActivity {
 
         laneNumber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b)
-            {
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 laneNumberText.setText(getResources().getText(R.string.lane_number).toString() + (i + 3)); //Update the TextView
-                Config.LANES = i + 3; //Write to the Config file
+                Config.LANES = i + 1; //Write to the Config file
 
-                dataSync.setValue(getString(R.string.lane_number_key), String.valueOf(i+3)); //Store that value
+                dataSync.setValue(getString(R.string.lane_number_key), String.valueOf(i + 3)); //Store that value
             }
 
             @Override
@@ -83,8 +81,8 @@ public class OptionsActivity extends AppCompatActivity {
         maxSpeedText.setText(getResources().getText(R.string.max_speed).toString() + (Config.MAX_SPEED));
         laneNumberText.setText(getResources().getText(R.string.lane_number).toString() + (Config.LANES));
 
-        maxSpeed.setProgress((int)Config.MAX_SPEED-5);
-        laneNumber.setProgress((int)Config.LANES-3);
+        maxSpeed.setProgress((int) Config.MAX_SPEED - 5);
+        laneNumber.setProgress(Config.LANES - 3);
 
     }
 
@@ -94,8 +92,9 @@ public class OptionsActivity extends AppCompatActivity {
 
         public DataSync(Context context) {
             this.context = context;
-            sharedPreferences = context.getSharedPreferences(context.getString(R.string.shared_preferences_key),Context.MODE_PRIVATE);
+            sharedPreferences = context.getSharedPreferences(context.getString(R.string.shared_preferences_key), Context.MODE_PRIVATE);
         }
+
         public String getValue(String key, String defaultValue) {
             return sharedPreferences.getString(key, defaultValue);
         }

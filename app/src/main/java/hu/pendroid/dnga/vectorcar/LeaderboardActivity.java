@@ -46,26 +46,26 @@ public class LeaderboardActivity extends AppCompatActivity {
         });
     }
 
-    private void initListView(){
+    private void initListView() {
         List<ScoreMenuListItem> scoreMenuListItems = getScores(); //Make a list from the scores
 
         scoreMenuAdapter = new ScoreMenuAdapter(this, R.layout.score_list_item, scoreMenuListItems);
         listView.setAdapter(scoreMenuAdapter);
     }
 
-    private List<ScoreMenuListItem> getScores(){
+    private List<ScoreMenuListItem> getScores() {
         List<ScoreMenuListItem> returnScores = new ArrayList<>();
 
         String valuesString = dataSync.getValue(getString(R.string.score_list_key), ""); //Get the saved score data
 
-        if(valuesString.length() != 0) { //Make sure that there are scores
+        if (valuesString.length() != 0) { //Make sure that there are scores
 
             String values[] = valuesString.split("%%"); //The key-value pairs are separated with %%
 
             int score[] = new int[values.length];
             String name[] = new String[values.length];
 
-            for(int i = 0; i < values.length; i++) {
+            for (int i = 0; i < values.length; i++) {
                 String scorename[] = values[i].split("->"); // The key and value are separated with ->
                 score[i] = Integer.valueOf(scorename[0]); //Put the key to the score[i]
                 name[i] = scorename[1]; //Put the value to the name[i]
@@ -74,11 +74,10 @@ public class LeaderboardActivity extends AppCompatActivity {
             QuickSort quicksort = new QuickSort(); //Sort the score and name array
             quicksort.sort(score, name);
 
-            for(int i = values.length-1; i > -1; i--){ //Put the score and name array's values in the return list
-                returnScores.add(new ScoreMenuListItem((values.length-i)+".", name[i], String.valueOf(score[i]), values.length-i == 1 ? R.drawable.first : values.length-i == 2 ? R.drawable.second :  values.length-i == 3 ? R.drawable.third : 0, Color.GRAY));
+            for (int i = values.length - 1; i > -1; i--) { //Put the score and name array's values in the return list
+                returnScores.add(new ScoreMenuListItem((values.length - i) + ".", name[i], String.valueOf(score[i]), values.length - i == 1 ? R.drawable.first : values.length - i == 2 ? R.drawable.second : values.length - i == 3 ? R.drawable.third : 0, Color.GRAY));
             }
-        }
-        else { //In case there is no score
+        } else { //In case there is no score
             Toast.makeText(this, getText(R.string.no_scores), Toast.LENGTH_LONG).show();
         }
 
@@ -118,11 +117,10 @@ public class LeaderboardActivity extends AppCompatActivity {
             TextView scoreTextView = (TextView) scoreListItemView.findViewById(R.id.scoreTextView);
             ImageView imageView = (ImageView) scoreListItemView.findViewById(R.id.scoreImageView);
 
-            if(scoreMenuListItem.mode == ScoreMenuListItem.DOBOGOS) {
+            if (scoreMenuListItem.mode == ScoreMenuListItem.DOBOGOS) {
                 imageView.setVisibility(View.VISIBLE);
                 imageView.setImageResource(image);
-            }
-            else {
+            } else {
                 imageView.setVisibility(View.GONE);
             }
 
@@ -169,8 +167,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         String scoreText;
         int mode;
 
-        public ScoreMenuListItem(String posText, String nameText, String scoreText, int img, int color)
-        {
+        public ScoreMenuListItem(String posText, String nameText, String scoreText, int img, int color) {
             imageRes = img;
             colorRes = color;
             this.posText = posText;
@@ -178,8 +175,8 @@ public class LeaderboardActivity extends AppCompatActivity {
             this.scoreText = scoreText;
             mode = DOBOGOS;
         }
-        public ScoreMenuListItem(String posText, String nameText, String scoreText, int color)
-        {
+
+        public ScoreMenuListItem(String posText, String nameText, String scoreText, int color) {
             colorRes = color;
             this.posText = posText;
             this.nameText = nameText;
@@ -195,7 +192,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         public void sort(int[] values) {
             // check for empty or null array
-            if (values ==null || values.length==0){
+            if (values == null || values.length == 0) {
                 return;
             }
             this.numbers = values;
@@ -205,7 +202,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
         public void sort(int[] values, String[] values2) {
             // check for empty or null array
-            if (values ==null || values.length==0){
+            if (values == null || values.length == 0) {
                 return;
             }
             this.numbers = values;
@@ -217,7 +214,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         private void quicksort(int low, int high) {
             int i = low, j = high;
             // Get the pivot element from the middle of the list
-            int pivot = numbers[low + (high-low)/2];
+            int pivot = numbers[low + (high - low) / 2];
 
             // Divide into two lists
             while (i <= j) {
@@ -254,7 +251,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             int temp = numbers[i];
             numbers[i] = numbers[j];
             numbers[j] = temp;
-            if(strArray.length == numbers.length) {
+            if (strArray.length == numbers.length) {
                 String strTemp = strArray[i];
                 strArray[i] = strArray[j];
                 strArray[j] = strTemp;

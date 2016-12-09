@@ -57,7 +57,7 @@ public final class GameActivity extends Activity implements
         detector = new GestureDetectorCompat(this, this);
     }
 
-    private void askName(){
+    private void askName() {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         alert.setTitle(getText(R.string.choose_name_title));
@@ -69,7 +69,6 @@ public final class GameActivity extends Activity implements
 
         input.setScaleX(0.85f);
         input.setGravity(Gravity.CENTER_VERTICAL);
-
 
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -95,7 +94,7 @@ public final class GameActivity extends Activity implements
         int speed = (int) (Math.abs(ground.motion.getY()) * multiplier);
         roadInfoText.setText(road + "");
         velocityInfoText.setText(speed + "");
-        scoreInfoText.setText((road + (Config.punctureCounter * Config.scoreReductionPuncture))+"");
+        scoreInfoText.setText((road + (Config.punctureCounter * Config.scoreReductionPuncture)) + "");
         currentUserScore = road;
 
         if (ground.isPunctured()) {
@@ -150,17 +149,17 @@ public final class GameActivity extends Activity implements
 
                         currentUserName = currentUserName == null || currentUserName.equals("") ? "Unknown" : currentUserName; //If no name typed it is unknown
 
-                        currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName; //Replace forbidden chars
+                        currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%", "") : currentUserName; //Replace forbidden chars
 
                         //Save score value to sharedPreferences
                         OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
 
                         String values = ""; //Saved string, contains key-value pairs separated with %% and ->
                         values = dataSync.getValue(getString(R.string.score_list_key), values); //Get the existing scores
-                        Log.d("VC", "  "+ (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)));
+                        Log.d("VC", "  " + (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)));
 
                         //Print the score on the gameover layout
-                        gameOverScoreText.setText((currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture))+"");
+                        gameOverScoreText.setText((currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)) + "");
 
                         //Put the new score to the end
                         values += (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)) + "->" + currentUserName + "%%";
