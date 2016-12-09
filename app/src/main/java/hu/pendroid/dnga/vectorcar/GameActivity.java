@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,6 +67,8 @@ public final class GameActivity extends Activity implements
 
         alert.setView(input);
 
+        input.setScaleX(0.9f);
+        input.setGravity(Gravity.CENTER_VERTICAL);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
