@@ -148,7 +148,7 @@ public final class GameActivity extends Activity implements
                             }
                         });
 
-                        currentUserName = currentUserName == null || currentUserName.equals("" ) ? "Unknown" : currentUserName; //If no name typed it is unknown
+                        currentUserName = currentUserName == null || currentUserName.equals("") ? "Unknown" : currentUserName; //If no name typed it is unknown
 
                         currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName; //Replace forbidden chars
 
