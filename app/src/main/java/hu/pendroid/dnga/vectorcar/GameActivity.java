@@ -67,14 +67,14 @@ public final class GameActivity extends Activity implements
 
         alert.setView(input);
 
-        input.setScaleX(0.9f);
+        input.setScaleX(0.85f);
         input.setGravity(Gravity.CENTER_VERTICAL);
+
+
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 currentUserName = input.getText().toString();
-                currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName; //Replace forbidden chars
-                currentUserName = currentUserName.equals("") ? "Unknown" : currentUserName; //If no name typed it is unknown
                 dialog.dismiss();
             }
         });
@@ -82,7 +82,6 @@ public final class GameActivity extends Activity implements
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
-                hideNavigationBar();
             }
         });
 
@@ -148,6 +147,10 @@ public final class GameActivity extends Activity implements
                                 finish();
                             }
                         });
+
+                        currentUserName = currentUserName == null || currentUserName.equals("") ? "Unknown" : currentUserName; //If no name typed it is unknown
+
+                        currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName; //Replace forbidden chars
 
                         //Save score value to sharedPreferences
                         OptionsActivity.DataSync dataSync = new OptionsActivity.DataSync(GameActivity.this);
