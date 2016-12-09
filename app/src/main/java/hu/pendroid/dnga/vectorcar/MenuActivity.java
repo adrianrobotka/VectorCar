@@ -44,6 +44,7 @@ public final class MenuActivity extends Activity {
         initOptionValues();
 
         controller.setFps(Config.FPS);
+
     }
 
     private void initMenu() {

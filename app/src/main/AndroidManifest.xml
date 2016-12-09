@@ -31,8 +31,8 @@
             android:name=".CreditsActivity"
             android:label="@string/menu_item5"
             android:screenOrientation="portrait" />
-        <activity android:name=".OptionsActivity"></activity>
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".OptionsActivity" />
+        <activity android:name=".LeaderboardActivity" />
     </application>
 
 </manifest>

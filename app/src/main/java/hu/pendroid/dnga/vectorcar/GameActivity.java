@@ -70,8 +70,9 @@ public final class GameActivity extends Activity implements
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 currentUserName = input.getText().toString();
+                currentUserName = currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName; //Replace forbidden chars
+                currentUserName = currentUserName.equals("") ? "Unknown" : currentUserName; //If no name typed it is unknown
                 dialog.dismiss();
-                hideNavigationBar();
             }
         });
 
@@ -156,7 +157,7 @@ public final class GameActivity extends Activity implements
                         gameOverScoreText.setText((currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture))+"");
 
                         //Put the new score to the end
-                        values += (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)) + "->" + (currentUserName.contains("%%") ? currentUserName.replaceAll("%%","") : currentUserName) + "%%";
+                        values += (currentUserScore + (Config.punctureCounter * Config.scoreReductionPuncture)) + "->" + currentUserName + "%%";
 
                         //Save it to the sharedPreferences
                         dataSync.setValue(getString(R.string.score_list_key), values);
